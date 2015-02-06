@@ -1,0 +1,40 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+LISA
+</name>
+</assembly>
+<members>
+<member name="P:LISA.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_0">
+	<summary>
+  Looks up a localized string similar to 185.13.227.5.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_1">
+	<summary>
+  Looks up a localized string similar to gip6ib.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_2">
+	<summary>
+  Looks up a localized string similar to gip6ib_lisa2014.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_3">
+	<summary>
+  Looks up a localized string similar to gip6ib_lisa.
+</summary>
+</member><member name="T:LISA.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>
