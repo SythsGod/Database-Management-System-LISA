@@ -60,30 +60,58 @@ Namespace My.Resources
             End Set
         End Property
         
-        Friend ReadOnly Property Button_Close() As System.Drawing.Bitmap
+        Friend ReadOnly Property Button_Close_2_0() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Button_Close", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Button_Close_2_0", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
-        Friend ReadOnly Property Button_Maximize_0() As System.Drawing.Bitmap
+        Friend ReadOnly Property Button_Close_2_1() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Button_Maximize_0", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Button_Close_2_1", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
-        Friend ReadOnly Property Button_Maximize_1() As System.Drawing.Bitmap
+        Friend ReadOnly Property Button_Maximize_2_0_0() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Button_Maximize_1", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Button_Maximize_2_0_0", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
-        Friend ReadOnly Property Button_Minimize() As System.Drawing.Bitmap
+        Friend ReadOnly Property Button_Maximize_2_0_1() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Button_Minimize", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Button_Maximize_2_0_1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Button_Maximize_2_1_0() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Button_Maximize_2_1_0", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Button_Maximize_2_1_1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Button_Maximize_2_1_1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Button_Minimize_2_0() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Button_Minimize_2_0", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Button_Minimize_2_1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Button_Minimize_2_1", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

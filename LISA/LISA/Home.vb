@@ -1,4 +1,7 @@
-﻿Imports System.Runtime.InteropServices
+﻿'Blue buttons:
+'Hex: #3998d6 | Argb: 57,152,214
+
+Imports System.Runtime.InteropServices
 
 Public Class LISA
 
@@ -14,8 +17,10 @@ Public Class LISA
         Me.Size = New Size(1280, 720)
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         Me.StartPosition = FormStartPosition.CenterScreen
-        Me.BackgroundImage = My.Resources.IMG_BG_BLUR
-        Me.BackgroundImageLayout = ImageLayout.Center
+        Me.BackColor = Color.White
+        'Me.DoubleBuffered = True
+        'Me.BackgroundImage = My.Resources.IMG_BG_BLUR
+        'Me.BackgroundImageLayout = ImageLayout.Stretch
 
         GetServerVars()
         OpenConnection()
@@ -48,7 +53,7 @@ Public Class LISA
             .Name = "lblTitle"
             .Text = "Hoofd Menu:"
             .TextAlign = ContentAlignment.MiddleLeft
-            .Location = New Point(30, CInt((50 - label1.Height) / 2))
+            .Location = New Point(30, CInt((15 - label1.Height) / 2))
             .BackColor = Color.Transparent
             .Tag = -1
         End With
@@ -59,7 +64,7 @@ Public Class LISA
     Private Sub ButtonPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
         'Remove the 'black given border' on a flat button by painting over it using the same background color as the button itself
         Dim button1 = DirectCast(sender, Button)
-        Using P As New Pen(Me.BackColor)
+        Using P As New Pen(Color.FromArgb(255, 57, 152, 214))
             e.Graphics.DrawRectangle(P, 1, 1, button1.Width - 3, button1.Height - 3)
         End Using
     End Sub
@@ -110,7 +115,7 @@ Public Class LISA
     End Sub
 
     Private Sub Main_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
-        Dim brush As New SolidBrush(Color.FromArgb(190, 255, 127, 80))
+        Dim brush As New SolidBrush(Color.FromArgb(255, 57, 152, 214)) 'Coral: Color.FromArgb(255, 255, 127, 80)
         Dim paper As Graphics
 
         'Draw a rectangle of lines around the form
@@ -118,7 +123,7 @@ Public Class LISA
 
         paper = e.Graphics
 
-        paper.FillRectangle(brush, 0, 0, Me.ClientRectangle.Width, 50)
+        paper.FillRectangle(brush, 0, 0, Me.ClientRectangle.Width - 90, 26) 'I'm cheating here, don't tell anyone
     End Sub
 
     Private Sub CreateControlBox()
@@ -173,34 +178,46 @@ Public Class LISA
         For i = 0 To 2
             Dim button1 As New ControlBoxButton
             With button1
-                .Anchor = AnchorStyles.Top Or AnchorStyles.Right
-                .Name = "Generic" & i
+                .Name = "GenericControlBox_" & i
                 .Tag = "1" & i
-                .Location = New Point(Me.ClientRectangle.Width - 45 * (i + 1), 5)
-                .Size = New Size(40, 40)
-                .FlatStyle = FlatStyle.Flat
+                .Location = New Point(Me.ClientRectangle.Width - 30 * (i + 1), 0)
+                .BackColor = Color.Transparent
                 .SetImage = i
-                .BackgroundImageLayout = ImageLayout.Center
             End With
 
             AddHandler button1.Click, AddressOf OnButtonClick
-            AddHandler button1.Paint, AddressOf ButtonPaint
+            AddHandler button1.MouseEnter, AddressOf ControlMouseEnter
+            AddHandler button1.MouseLeave, AddressOf ControlMouseLeave
+            'AddHandler button1.Paint, AddressOf ButtonPaint
             Me.Controls.Add(button1)
         Next
+    End Sub
+
+    Private Sub ControlMouseEnter(ByVal sender As Object, ByVal e As System.EventArgs)
+        DirectCast(sender, ControlBoxButton).SetHover = True
+        DirectCast(sender, ControlBoxButton).SetHoverImage = CInt(DirectCast(sender, ControlBoxButton).Tag) - 10
+    End Sub
+
+    Private Sub ControlMouseLeave(ByVal sender As Object, ByVal e As System.EventArgs)
+        DirectCast(sender, ControlBoxButton).SetHover = False
+        DirectCast(sender, ControlBoxButton).SetImage = CInt(DirectCast(sender, ControlBoxButton).Tag) - 10
     End Sub
 
     Private Sub AddLanguagePicker()
         Dim button1 As New Button
 
         With button1
-            .Tag = 13
+            .Tag = 14
             .Name = "btnLanguageSwitch"
             .Text = "EN"
             .Location = New Point(Me.ClientRectangle.Width - 50, Me.ClientRectangle.Height - 50)
             .Size = New Size(50, 50)
-            .BackColor = Color.Brown
+            .BackColor = Color.White
             .Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
             .FlatStyle = FlatStyle.Flat
+            .FlatAppearance.BorderColor = Color.FromArgb(255, 57, 152, 214)
+            .FlatAppearance.BorderSize = 2
+            .FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 57, 152, 214)
         End With
 
         AddHandler button1.Click, AddressOf OnClickLanguageChange
@@ -248,13 +265,13 @@ Public Class LISA
 
         With button1
             .Anchor = AnchorStyles.None
-            .BackColor = Color.Transparent
+            .BackColor = Color.White
             .Name = "btn_" & TableNamesInDatabase.Rows(i)(1).ToString
             .Text = TableNamesInDatabase.Rows(i)(2).ToString
             .Size = New Size(420, 75)
-            .FlatAppearance.BorderColor = Nothing
-            .FlatAppearance.BorderSize = 0
-            .FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 255, 255, 255)
+            .FlatAppearance.BorderColor = Color.FromArgb(255, 57, 152, 214)
+            .FlatAppearance.BorderSize = 2
+            .FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 57, 152, 214)
             If Switch Then
                 .Location = New Point(680, 132 + ((75 + 20) * (i - 5)))
             Else
@@ -284,13 +301,15 @@ Public Class LISA
             Select Case tag
                 Case 10
                     Me.Close()
-                Case 11
+                Case 11 Or 13
                     If Me.WindowState = FormWindowState.Normal Then
                         Me.WindowState = FormWindowState.Maximized
                         DirectCast(sender, ControlBoxButton).SetImage = 3
+                        DirectCast(sender, ControlBoxButton).Tag = 13
                     Else
                         Me.WindowState = FormWindowState.Normal
                         DirectCast(sender, ControlBoxButton).SetImage = 1
+                        DirectCast(sender, ControlBoxButton).Tag = 11
                     End If
                 Case 12
                     Me.WindowState = FormWindowState.Minimized
@@ -303,6 +322,7 @@ Public Class LISA
 
         'TO-DO CHANGE THIS FFS (Because this is not how we do things)
         'I CHANGED IT! ^w^
+        'I forgot what I changed ;^;
 
         Dim name As String
         If LangSwitch Then

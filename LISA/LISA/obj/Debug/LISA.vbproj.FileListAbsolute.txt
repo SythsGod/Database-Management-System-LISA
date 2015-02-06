@@ -32,3 +32,15 @@ G:\School\Visual Basic\6Inf\LISA\LISA\LISA\obj\Debug\LISA.Resources.resources
 G:\School\Visual Basic\6Inf\LISA\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
 G:\School\Visual Basic\6Inf\LISA\LISA\LISA\obj\Debug\LISA.test_form.resources
 G:\School\Visual Basic\6Inf\LISA\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.exe
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.xml
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.pdb
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.pdb
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.xml
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\ResolveAssemblyReference.cache
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.LISA.resources
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.Resources.resources
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.test_form.resources
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache

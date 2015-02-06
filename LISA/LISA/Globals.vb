@@ -28,4 +28,5 @@ End Module
 '   10 = Close
 '   11 = Maximize
 '   12 = Minimize
-'   13 = Language Picker
+'   13 = Maximize 2
+'   14 = Language Picker

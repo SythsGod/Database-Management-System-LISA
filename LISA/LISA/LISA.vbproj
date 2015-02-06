@@ -139,6 +139,12 @@
     <None Include="Resources\Sansation_Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG_BG_BLUR.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Button_Close.png" />
   </ItemGroup>
   <ItemGroup>
@@ -151,10 +157,28 @@
     <None Include="Resources\Button_Minimize.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <None Include="Resources\Button_Close_2_0.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IMG_BG_BLUR.jpg" />
+    <None Include="Resources\Button_Close_2_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_Maximize_2_0_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_Maximize_2_0_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_Maximize_2_1_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_Maximize_2_1_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_Minimize_2_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_Minimize_2_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

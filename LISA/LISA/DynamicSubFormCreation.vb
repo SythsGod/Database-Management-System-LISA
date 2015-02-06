@@ -10,7 +10,7 @@
             .Name = "frm_" & TableNamesInDatabase.Rows(buttonTag)(1).ToString
             .FormBorderStyle = Windows.Forms.FormBorderStyle.None
             .Tag = buttonTag
-            .StartPosition = FormStartPosition.CenterScreen
+            .StartPosition = FormStartPosition.CenterParent
             .BackgroundImage = My.Resources.IMG_BG_BLUR
             .BackgroundImageLayout = ImageLayout.Center
         End With
