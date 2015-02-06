@@ -22,9 +22,9 @@ Public NotInheritable Class ControlBoxButton
         img_Maximize(2) = My.Resources.Button_Maximize_2_1_0
         img_Maximize(3) = My.Resources.Button_Maximize_2_1_1
 
-        Me.BackgroundImageLayout = ImageLayout.Center Or ImageLayout.Stretch
+        Me.BackgroundImageLayout = ImageLayout.Center 'Or ImageLayout.Stretch
         Me.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        Me.BackColor = Color.White
+        Me.BackColor = Color.Black
         Me.FlatStyle = Windows.Forms.FlatStyle.Flat
         Me.FlatAppearance.MouseOverBackColor = Nothing
         Me.FlatAppearance.BorderColor = Color.White

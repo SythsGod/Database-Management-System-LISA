@@ -62,7 +62,9 @@ Public Class LISA
     End Sub
 
     Private Sub ButtonPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
-        'Remove the 'black given border' on a flat button by painting over it using the same background color as the button itself
+        'Pretty much useless now
+
+        'Remove the 'given border' on a flat button by painting over it using the same background color as the button itself
         Dim button1 = DirectCast(sender, Button)
         Using P As New Pen(Color.FromArgb(255, 57, 152, 214))
             e.Graphics.DrawRectangle(P, 1, 1, button1.Width - 3, button1.Height - 3)
@@ -118,61 +120,12 @@ Public Class LISA
         Dim brush As New SolidBrush(Color.FromArgb(255, 57, 152, 214)) 'Coral: Color.FromArgb(255, 255, 127, 80)
         Dim paper As Graphics
 
-        'Draw a rectangle of lines around the form
-        'Dim points() As Point = {New Point(1, 1), New Point(Me.Width - 1, 1), New Point(Me.Width - 1, Me.Height - 1), New Point(1, Me.Height - 1), New Point(1, 1)}
-
         paper = e.Graphics
 
         paper.FillRectangle(brush, 0, 0, Me.ClientRectangle.Width - 90, 26) 'I'm cheating here, don't tell anyone
     End Sub
 
     Private Sub CreateControlBox()
-        'Dim button1, button2, button3 As New Button
-
-        'With button1 'Close
-        '    .Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        '    .Name = "btnClose"
-        '    .Tag = 10
-        '    .Size = New Size(40, 40)
-        '    .Location = New Point(Me.ClientRectangle.Width - 45, 5)
-        '    .FlatStyle = FlatStyle.Flat
-        '    .BackgroundImage = My.Resources.Button_Close
-        '    .BackgroundImageLayout = ImageLayout.Center
-        'End With
-
-        'AddHandler button1.Click, AddressOf OnButtonClick
-        'AddHandler button1.Paint, AddressOf ButtonPaint
-        'Me.Controls.Add(button1)
-
-        'With button2 'Maximize
-        '    .Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        '    .Name = "btnMaximize"
-        '    .Tag = 11
-        '    .Size = New Size(40, 40)
-        '    .Location = New Point(Me.ClientRectangle.Width - 90, 5)
-        '    .FlatStyle = FlatStyle.Flat
-        '    .BackgroundImage = My.Resources.Button_Maximize_0
-        '    .BackgroundImageLayout = ImageLayout.Center
-        'End With
-
-        'AddHandler button2.Click, AddressOf OnButtonClick
-        'AddHandler button2.Paint, AddressOf ButtonPaint
-        'Me.Controls.Add(button2)
-
-        'With button3 'Minimize
-        '    .Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        '    .Name = "btnMinimize"
-        '    .Tag = 12
-        '    .Size = New Size(40, 40)
-        '    .Location = New Point(Me.ClientRectangle.Width - 135, 5)
-        '    .FlatStyle = FlatStyle.Flat
-        '    .BackgroundImage = My.Resources.Button_Minimize
-        'End With
-
-        'AddHandler button3.Click, AddressOf OnButtonClick
-        'AddHandler button3.Paint, AddressOf ButtonPaint
-        'Me.Controls.Add(button3)
-
         '-------> YAY FOR LESS CODE <--------
 
         For i = 0 To 2
