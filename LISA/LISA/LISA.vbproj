@@ -74,6 +74,9 @@
     </Compile>
     <Compile Include="DatabaseRetrieval.vb" />
     <Compile Include="DynamicSubFormCreation.vb" />
+    <Compile Include="FormButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Globals.vb" />
     <Compile Include="Home.Designer.vb">
       <DependentUpon>Home.vb</DependentUpon>
