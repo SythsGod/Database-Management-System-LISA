@@ -15,10 +15,6 @@ Module Globals
         ServerVars(1) = My.Resources.SERVER_VAR_1
         ServerVars(2) = My.Resources.SERVER_VAR_2
         ServerVars(3) = My.Resources.SERVER_VAR_3
-        'ServerVars(0) = "db4free.net"
-        'ServerVars(1) = "SythsGod"
-        'ServerVars(2) = "Sythsgod0911"
-        'ServerVars(3) = "modlist"
     End Sub
 End Module
 
