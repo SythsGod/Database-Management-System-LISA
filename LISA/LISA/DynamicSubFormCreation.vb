@@ -57,6 +57,8 @@
             .DataSource = AllTableInformation(buttonTag).Tables(0)
             .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         End With
+
+        AddHandler dataGridView1.DataBindingComplete, AddressOf dataGridView1_DataBindingComplete
         form1.Controls.Add(dataGridView1)
 
         'Add textboxes and buttons to handle the inserting of new records
@@ -149,5 +151,27 @@
         Using P As New Pen(currForm.BackColor)
             e.Graphics.DrawRectangle(P, 1, 1, button1.Width - 3, button1.Height - 3)
         End Using
+    End Sub
+
+    Private Sub dataGridView1_DataBindingComplete(ByVal sender As Object, ByVal e As System.EventArgs)
+        If DirectCast(sender, DataGridView).Columns.Count > 0 Then
+            'MsgBox("SCRU YU") This now works :D It removes the first column (aka the ID column)
+            DirectCast(sender, DataGridView).Columns(0).Visible = False
+        End If
+
+        '* IDIOT.
+        '* Only for postal code form:
+        '* Change the numbers to their respective countries in the column 'land'
+        'If DirectCast(sender, DataGridView).FindForm.Name = "frm_" & TableNamesInDatabase.Rows(3)(1).ToString Then '* if the current form is the 'Woonplaats'-form
+        '    For i = 0 To DirectCast(sender, DataGridView).Rows.Count - 1
+        '        'MsgBox(DirectCast(sender, DataGridView).Item(3, i).Value) DEBUG
+        '        Select Case DirectCast(sender, DataGridView).Item(3, i).Value.ToString
+        '            Case "1" 'Belgie
+        '                DirectCast(sender, DataGridView).Item(3, i).Value = "België"
+        '            Case "2" 'Nederland
+        '                DirectCast(sender, DataGridView).Item(3, i).Value = "Nederland"
+        '        End Select
+        '    Next
+        'End If
     End Sub
 End Module

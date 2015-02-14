@@ -18,8 +18,14 @@ Module DatabaseRetrieval
         Dim TEMP_DataSet As New DataSet
 
         If isConnected Then
-            Dim sqlStr As String = "SELECT * FROM " & table
-            'MsgBox(sqlStr)
+            Dim sqlStr As String = ""
+
+            If table = "" Then
+                sqlStr = "SELECT * FROM " & table
+            Else
+                sqlStr = "SELECT * FROM " & table
+            End If
+
             Dim adp As MySqlDataAdapter = New MySqlDataAdapter(sqlStr, myConn)
 
             Try

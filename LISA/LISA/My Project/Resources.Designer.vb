@@ -123,6 +123,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property Lisa_Icon_Style_2_No_BG() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Lisa_Icon_Style_2_No_BG", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Sansation_Regular() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("Sansation_Regular", resourceCulture)

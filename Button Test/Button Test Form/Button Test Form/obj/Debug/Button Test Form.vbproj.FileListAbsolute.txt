@@ -1,0 +1,13 @@
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\bin\Debug\Button Test Form.exe
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\bin\Debug\Button Test Form.pdb
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\bin\Debug\Button Test Form.xml
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\obj\Debug\Button_Test_Form.Form1.resources
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\obj\Debug\Button_Test_Form.Resources.resources
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\obj\Debug\Button Test Form.vbproj.GenerateResource.Cache
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\obj\Debug\Button Test Form.exe
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\obj\Debug\Button Test Form.xml
+C:\Users\Sachimi\AppData\Local\Temporary Projects\Button Test Form\obj\Debug\Button Test Form.pdb
+G:\School\GIP\Database-Management-System-LISA\Button Test\Button Test Form\Button Test Form\obj\Debug\Button Test Form.exe
+G:\School\GIP\Database-Management-System-LISA\Button Test\Button Test Form\Button Test Form\obj\Debug\Button Test Form.xml
+G:\School\GIP\Database-Management-System-LISA\Button Test\Button Test Form\Button Test Form\obj\Debug\Button Test Form.pdb

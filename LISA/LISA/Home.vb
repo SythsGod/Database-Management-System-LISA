@@ -24,7 +24,7 @@ Public Class LISA
         TableNamesInDatabase = RetrieveTableNames("vb_menu").Tables(0) 'Get the names of all the tables this application will need
         CreateButtons() 'Create all the buttons which need to be placed on the form
         CreateControlBox() 'Create the three 'ControlBox' controls (buttons)
-        AddTitleLabel() 'Add a title bar in the form of a label at the top of the form (might remove on main form)
+        'AddTitleLabel() 'Add a title bar in the form of a label at the top of the form (might remove on main form)
         AddLanguagePicker() 'Add a language button to the bottom-right of the form
     End Sub
 
@@ -116,16 +116,6 @@ Public Class LISA
 
         Me.Controls.Add(label1)
     End Sub
-
-
-
-
-
-
-
-
-
-
     
     'Think of a good name for this function (Job: Locks the mouse coords on MouseDown
     Private Function ThinkOfAGoodName(ByVal e As System.Windows.Forms.MouseEventArgs) As Point
@@ -198,7 +188,7 @@ Public Class LISA
             .Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
             .FlatStyle = FlatStyle.Flat
             .FlatAppearance.BorderColor = Color.FromArgb(255, 57, 152, 214)
-            .FlatAppearance.BorderSize = 2
+            .FlatAppearance.BorderSize = 0
             .FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 57, 152, 214)
         End With
 
