@@ -1,4 +1,6 @@
-﻿Public Class test_form
+﻿Imports MySql.Data.MySqlClient
+
+Public Class test_form
     Private MouseIsDown As Boolean
     Private AlreadyLocked As Boolean
     Private setPoint As Point
@@ -8,6 +10,34 @@
         Me.Size = New Size(1280, 720)
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         Me.StartPosition = FormStartPosition.CenterScreen
+
+        
+
+        'Dim sqlConn As New MySqlConnection
+        'Dim sqlStr As String = "SELECT * FROM Test_Tabel"
+
+        'sqlConn.ConnectionString = "server=" & ServerVars(0) & ";User id=" & ServerVars(1) & ";password=" & ServerVars(2) & ";database=" & ServerVars(3)
+        'sqlConn.Open()
+        'Dim adp As MySqlDataAdapter = New MySqlDataAdapter(sqlStr, sqlConn)
+        'Dim ds As New DataSet
+
+        'Try
+        '    adp.Fill(ds)
+        'Catch ex As Exception
+
+        'End Try
+
+        'adp.Dispose()
+        OpenConnection()
+
+        Dim ds As New DataSet
+        ds = RetrieveTableNames("Test_Tabel")
+
+        Dim dgv As New DataGridView
+        dgv.Name = "dgv1"
+        dgv.DataSource = ds.Tables(0)
+        dgv.Location = New Point(20, 20)
+        Me.Controls.Add(dgv)
     End Sub
 
     Private Sub Main_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown

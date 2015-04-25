@@ -10,7 +10,7 @@ Module DatabaseRetrieval
             myConn.Open()
             isConnected = True
         Catch ex As Exception
-            MsgBox("Error: " & ex.Message)
+            MsgBox(ex.ToString)
         End Try
     End Sub
 

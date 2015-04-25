@@ -56,3 +56,28 @@ H:\School\Visual Basic\6Inf\Database-Management-System-LISA\LISA\LISA\obj\Debug\
 H:\School\Visual Basic\6Inf\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
 H:\School\Visual Basic\6Inf\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.test_form.resources
 H:\School\Visual Basic\6Inf\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.exe
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.xml
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.pdb
+E:\Database-Management-System-LISA-master\LISA\LISA\bin\Debug\LISA.exe
+E:\Database-Management-System-LISA-master\LISA\LISA\bin\Debug\LISA.pdb
+E:\Database-Management-System-LISA-master\LISA\LISA\bin\Debug\LISA.xml
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\ResolveAssemblyReference.cache
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.LISA.resources
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.Resources.resources
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.test_form.resources
+E:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache
+E:\Database-Management-System-LISA-master\LISA\LISA\bin\Debug\MySql.Data.dll
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.exe
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.xml
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.pdb
+H:\Database-Management-System-LISA-master\LISA\LISA\bin\Debug\LISA.exe
+H:\Database-Management-System-LISA-master\LISA\LISA\bin\Debug\LISA.pdb
+H:\Database-Management-System-LISA-master\LISA\LISA\bin\Debug\LISA.xml
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\ResolveAssemblyReference.cache
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.LISA.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.Resources.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.test_form.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache

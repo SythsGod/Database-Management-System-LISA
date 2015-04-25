@@ -1,0 +1,6 @@
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Release\ResolveAssemblyReference.cache
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Release\LISA.LISA.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Release\LISA.Resources.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Release\LISA.SplashLoading.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Release\LISA.test_form.resources
+H:\Database-Management-System-LISA-master\LISA\LISA\obj\Release\LISA.vbproj.GenerateResource.Cache

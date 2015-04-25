@@ -229,26 +229,24 @@ Public Class LISA
     Private Sub OnButtonClick(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim tag As Integer = CInt(DirectCast(sender, Button).Tag)
 
-
-
         If tag < 10 Then
             SwitchWindows(tag)
         Else
             Select Case tag
                 Case 10
                     Me.Close()
-                Case 11 Or 13
+                Case 11
                     If Me.WindowState = FormWindowState.Normal Then
                         Me.WindowState = FormWindowState.Maximized
                         DirectCast(sender, ControlBoxButton).SetImage = 3
                         DirectCast(sender, ControlBoxButton).Tag = 13
-                    Else
-                        Me.WindowState = FormWindowState.Normal
-                        DirectCast(sender, ControlBoxButton).SetImage = 1
-                        DirectCast(sender, ControlBoxButton).Tag = 11
                     End If
                 Case 12
                     Me.WindowState = FormWindowState.Minimized
+                Case 13
+                    Me.WindowState = FormWindowState.Normal
+                    DirectCast(sender, ControlBoxButton).SetImage = 1
+                    DirectCast(sender, ControlBoxButton).Tag = 11
             End Select
         End If
     End Sub
