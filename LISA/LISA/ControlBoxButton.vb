@@ -8,6 +8,7 @@ Public NotInheritable Class ControlBoxButton
     Private img_Close(1) As Bitmap
     Private img_Minimize(1) As Bitmap
     Private img_Maximize(3) As Bitmap
+    Private img_LangSettings(1) As Bitmap
 
     Private isOnHover As Boolean = False
 
@@ -21,10 +22,12 @@ Public NotInheritable Class ControlBoxButton
         img_Maximize(1) = My.Resources.Button_Maximize_2_0_1
         img_Maximize(2) = My.Resources.Button_Maximize_2_1_0
         img_Maximize(3) = My.Resources.Button_Maximize_2_1_1
+        img_LangSettings(0) = My.Resources.Language_Settings_Icon__Inactive_
+        img_LangSettings(1) = My.Resources.Language_Settings_Icon__Active_
 
         Me.BackgroundImageLayout = ImageLayout.Center 'Set the ImageBackground to center
         Me.Anchor = AnchorStyles.Top Or AnchorStyles.Right 'Anchor the buttons on Top-Right,
-        Me.BackColor = Color.Black
+        Me.BackColor = Color.Transparent
         Me.FlatStyle = Windows.Forms.FlatStyle.Flat
         Me.FlatAppearance.MouseOverBackColor = Nothing
         Me.FlatAppearance.BorderColor = Color.White
@@ -45,6 +48,8 @@ Public NotInheritable Class ControlBoxButton
                     Me.BackgroundImage = img_Minimize(0)
                 Case 3
                     Me.BackgroundImage = img_Maximize(2)
+                Case 4
+                    Me.BackgroundImage = img_LangSettings(0)
             End Select
         End Set
     End Property
@@ -62,6 +67,8 @@ Public NotInheritable Class ControlBoxButton
                         Me.BackgroundImage = img_Minimize(1)
                     Case 3 'Maximize 2
                         Me.BackgroundImage = img_Maximize(3)
+                    Case 4
+                        Me.BackgroundImage = img_LangSettings(1)
                 End Select
             End If
         End Set
@@ -73,4 +80,20 @@ Public NotInheritable Class ControlBoxButton
             isOnHover = value
         End Set
     End Property
+
+    Public Sub Minimize()
+        Me.FindForm.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Public Sub Maximize()
+        If Me.FindForm.WindowState = FormWindowState.Normal Then
+            Me.FindForm.WindowState = FormWindowState.Maximized
+            Me.SetImage = 3
+            Me.Tag = 13
+        Else
+            Me.FindForm.WindowState = FormWindowState.Normal
+            Me.SetImage = 1
+            Me.Tag = 11
+        End If
+    End Sub
 End Class

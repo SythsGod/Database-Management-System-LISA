@@ -116,9 +116,16 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property IMG_BG_BLUR() As System.Drawing.Bitmap
+        Friend ReadOnly Property Language_Settings_Icon__Active_() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("IMG_BG_BLUR", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Language_Settings_Icon__Active_", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Language_Settings_Icon__Inactive_() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Language_Settings_Icon__Inactive_", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -126,6 +133,13 @@ Namespace My.Resources
         Friend ReadOnly Property Lisa_Icon_Style_2_No_BG() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Lisa_Icon_Style_2_No_BG", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Lisa_Temp_Icon() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Lisa_Temp_Icon", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

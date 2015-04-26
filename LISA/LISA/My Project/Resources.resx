@@ -137,9 +137,6 @@
     <value>gip6ib_lisa</value>
     <comment>Needed Database Name</comment>
   </data>
-  <data name="IMG_BG_BLUR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IMG_BG_BLUR.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Button_Close_2_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Button_Close_2_0.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -166,5 +163,14 @@
   </data>
   <data name="Lisa_Icon_Style_2_No_BG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lisa Icon Style 2 No BG.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Language_Settings_Icon__Active_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Language Settings Icon (Active).png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Language_Settings_Icon__Inactive_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Language Settings Icon (Inactive).png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lisa_Temp_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lisa Temp Icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

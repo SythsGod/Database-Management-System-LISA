@@ -1,64 +1,76 @@
-﻿Module DynamicSubFormCreation
-    Private MouseIsDown As Boolean
-    Private AlreadyLocked As Boolean
-    Private SetPoint As Point
-    Public Sub CreateSubForm(ByVal buttonTag As Integer, ByVal name As String)
-        Dim form1 As New Form
+﻿Imports MySql.Data.MySqlClient
 
+Module DynamicSubFormCreation
+    Private data As New DataSet
+    Private changesWereMade As Boolean
+    Public Sub CreateSubForm(ByVal buttonTag As Integer, ByVal name As String)
+        data = AllTableInformation(buttonTag)
+
+        Dim form1 As New Form
         With form1
             .Size = New Size(1280, 720)
             .Name = "frm_" & TableNamesInDatabase.Rows(buttonTag)(1).ToString
             .FormBorderStyle = Windows.Forms.FormBorderStyle.None
             .Tag = buttonTag
-            .StartPosition = FormStartPosition.CenterParent
-            .BackgroundImage = My.Resources.IMG_BG_BLUR
-            .BackgroundImageLayout = ImageLayout.Center
+            .StartPosition = FormStartPosition.CenterScreen
+            .BackColor = Color.White
         End With
 
+        Dim button1 As New FormButton
+        With button1
+            .Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+            .Name = "GenericButton_Upload"
+            .Tag = "15"
+            .Size = New Size(100, 50)
+            .FlatStyle = FlatStyle.Flat
+            .Location = New Point(form1.ClientRectangle.Width - 120, form1.ClientRectangle.Height - 70)
+            .Text = "Upload" 'Use language settings to determine the text
+        End With
+        AddHandler button1.Click, AddressOf btnUpload_Click
+        form1.Controls.Add(button1)
+
+        'Control Boxes
         For i = 0 To 2
-            Dim button1 As New ControlBoxButton
-            With button1
-                .Anchor = AnchorStyles.Top Or AnchorStyles.Right
-                .Name = "Generic" & i
+            Dim button2 As New ControlBoxButton
+            With button2
+                .Name = "GenericControlBoxButton_" & i
                 .Tag = "1" & i
-                .Location = New Point(form1.ClientRectangle.Width - 45 * (i + 1), 5)
-                .Size = New Size(40, 40)
-                .FlatStyle = FlatStyle.Flat
+                .Location = New Point(form1.ClientRectangle.Width - 30 * (i + 1) + 1, -1)
+                .Size = New Size(30, 30)
                 .SetImage = i
-                .BackgroundImageLayout = ImageLayout.Center
             End With
 
-            AddHandler button1.Click, AddressOf controlboxButton_Click
-            AddHandler button1.Paint, AddressOf ButtonPaint
-            form1.Controls.Add(button1)
+            AddHandler button2.Click, AddressOf ControlBoxButton_Click
+            AddHandler button2.MouseEnter, AddressOf ControlMouseEnter
+            AddHandler button2.MouseLeave, AddressOf ControlMouseLeave
+            form1.Controls.Add(button2)
         Next
 
         Dim label1 As New Label
+        Dim label2 As New ShowAndHideLabel("GenericLabel_Actions")
         With label1
-            If LangSwitch Then
-                .Text = TableNamesInDatabase(buttonTag)(2).ToString
-            Else
-                .Text = TableNamesInDatabase(buttonTag)(3).ToString
-            End If
-            .BackColor = Color.Coral
+            .BackColor = Color.Transparent
             .TextAlign = ContentAlignment.MiddleLeft
-            .Location = New Point(30, CInt((50 - label1.Height) / 2))
-            .Name = "lbl" & name
-            .Text = name & ":"
+            .Location = New Point(30, 28)
+            .Name = "GenericLabel_" & name
+            .Text = name & ":" 'Use language settings to determine the text
             .Width = 150
         End With
+        label2.Location = New Point(20, form1.Height - 10 - label2.Height)
         form1.Controls.Add(label1)
+        form1.Controls.Add(label2)
 
         Dim dataGridView1 As New DataGridView
         With dataGridView1
-            .Name = "DataGridView" & name
+            .Anchor = AnchorStyles.Left Or AnchorStyles.Top
+            .Name = "GenericDataGridView_Main"
             .Location = New Point(20, 70)
-            .Size = New Size(200 * AllTableInformation(buttonTag).Tables(0).Columns.Count, form1.Height - 90)
-            .DataSource = AllTableInformation(buttonTag).Tables(0)
+            .Size = New Size(form1.Width - 40, 520)
+            .DataSource = data.Tables(0)
             .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         End With
-
         AddHandler dataGridView1.DataBindingComplete, AddressOf dataGridView1_DataBindingComplete
+        AddHandler dataGridView1.CellValueChanged, AddressOf dataGridView1_CellValueChanged
         form1.Controls.Add(dataGridView1)
 
         'Add textboxes and buttons to handle the inserting of new records
@@ -71,107 +83,97 @@
         '    form1.Controls.Add(textbox1)
         'Next 
 
-        AddHandler form1.Paint, AddressOf form1_paint
+        'AddHandler form1.Paint, AddressOf form1_Paint
         AddHandler form1.FormClosing, AddressOf form1_FormClosing
-        AddHandler form1.MouseDown, AddressOf Form1_MouseDown
-        AddHandler form1.MouseMove, AddressOf Form1_MouseMove
-        AddHandler form1.MouseUp, AddressOf Form1_MouseUp
+        AddHandler form1.Resize, AddressOf form1_Resize
+        AddHandler form1.MouseUp, AddressOf MoveForms.MouseUp
+        AddHandler form1.MouseMove, AddressOf MoveForms.MouseMove
+        AddHandler form1.MouseDown, AddressOf MoveForms.MouseDown
         form1.Show()
     End Sub
 
-    Private Function ThinkOfAGoodName(ByVal e As System.Windows.Forms.MouseEventArgs) As Point
-        If Not AlreadyLocked Then
-            Dim p As Point
-            p = New Point(e.X, e.Y)
-            AlreadyLocked = True
-            Return p
-        Else
-            Return SetPoint
-        End If
-    End Function
-
-    Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        Dim conditions As Boolean
-        conditions = e.X >= 0 And e.X <= DirectCast(sender, Form).ClientRectangle.Width And e.Y >= 0 And e.Y <= 50
-
-        MouseIsDown = conditions
-    End Sub
-
-    Private Sub Form1_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        If MouseIsDown Then
-            SetPoint = ThinkOfAGoodName(e)
-            DirectCast(sender, Form).Location = New Point(Control.MousePosition.X - SetPoint.X, Control.MousePosition.Y - SetPoint.Y)
-        End If
-    End Sub
-
-    Private Sub Form1_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        MouseIsDown = False
-        AlreadyLocked = False
-    End Sub
-
-
-    Private Sub form1_paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
-        Dim brush As New SolidBrush(Color.Coral)
-        Dim paper As Graphics
-
-        paper = e.Graphics
-
-        paper.FillRectangle(brush, 0, 0, DirectCast(sender, Form).ClientRectangle.Width, 50)
-    End Sub
+    'Temporary measure for black border around form (For visibility with white background)
+    'Private Sub form1_Paint(ByVal sender As Object, ByVal e As PaintEventArgs)
+    '    Dim pen As Pen = New Pen(Color.Black)
+    '    e.Graphics.DrawRectangle(pen, New Rectangle(0, 0, DirectCast(sender, Form).Width - 1, DirectCast(sender, Form).Height - 1))
+    'End Sub
 
     Private Sub form1_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs)
         LISA.Show()
         DirectCast(sender, Form).Dispose()
     End Sub
 
-    Private Sub controlboxButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim tag As Integer = CInt(DirectCast(sender, Button).Tag)
-        Dim currForm As Form = DirectCast(sender, Button).FindForm
+    Private Sub form1_Resize(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim dgv As DataGridView = CType(DirectCast(sender, Form).Controls("GenericDatagridView_Main"), DataGridView)
+        Dim lbl As Label = CType(DirectCast(sender, Form).Controls("GenericLabel_Actions"), Label)
 
-        Select Case tag
+        If DirectCast(sender, Form).WindowState = FormWindowState.Normal Then
+            dgv.Size = New Size(DirectCast(sender, Form).Width - 40, 520)
+            lbl.Location = New Point(20, DirectCast(sender, Form).Height - 10 - lbl.Height)
+        ElseIf DirectCast(sender, Form).WindowState = FormWindowState.Maximized Then
+            dgv.Size = New Size(My.Computer.Screen.WorkingArea.Width - 40, My.Computer.Screen.WorkingArea.Height - 200)
+            lbl.Location = New Point(20, My.Computer.Screen.WorkingArea.Height - lbl.Height + 10)
+        End If
+    End Sub
+
+    Private Sub ControlBoxButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim btn As ControlBoxButton = DirectCast(sender, ControlBoxButton)
+
+        Select Case CInt(DirectCast(sender, Button).Tag)
             Case 10 'Close
-                currForm.Close()
+                DirectCast(sender, ControlBoxButton).FindForm.Close()
             Case 11 'Maximize
-                If currForm.WindowState = FormWindowState.Normal Then
-                    currForm.WindowState = FormWindowState.Maximized
-                    DirectCast(sender, ControlBoxButton).SetImage = 3
-                Else
-                    currForm.WindowState = FormWindowState.Normal
-                    DirectCast(sender, ControlBoxButton).SetImage = 1
-                End If
+                btn.Maximize()
             Case 12 'Minimize
-                currForm.WindowState = FormWindowState.Minimized
+                btn.Minimize()
+            Case 13 'Maximize to minimize
+                btn.Maximize()
         End Select
     End Sub
 
-    Private Sub ButtonPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
-        Dim currForm As Form = DirectCast(sender, Button).FindForm
-        'Remove the 'black given border' on a flat button by painting over it using the same background color as the button itself
-        Dim button1 = DirectCast(sender, Button)
-        Using P As New Pen(currForm.BackColor)
-            e.Graphics.DrawRectangle(P, 1, 1, button1.Width - 3, button1.Height - 3)
-        End Using
-    End Sub
+    'Unused (Remove later)
+    'Private Sub ButtonPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
+    '    Dim currForm As Form = DirectCast(sender, Button).FindForm
+    '    'Remove the 'black given border' on a flat button by painting over it using the same background color as the button itself
+    '    Dim button1 = DirectCast(sender, Button)
+    '    Using P As New Pen(currForm.BackColor)
+    '        e.Graphics.DrawRectangle(P, 1, 1, button1.Width - 3, button1.Height - 3)
+    '    End Using
+    'End Sub
 
     Private Sub dataGridView1_DataBindingComplete(ByVal sender As Object, ByVal e As System.EventArgs)
         If DirectCast(sender, DataGridView).Columns.Count > 0 Then
-            'MsgBox("SCRU YU") This now works :D It removes the first column (aka the ID column)
+            'Hides first column with ID values
             DirectCast(sender, DataGridView).Columns(0).Visible = False
         End If
+    End Sub
 
-        '* IDIOT.
-        '* Only for postal code form:
-        '* Change the numbers to their respective countries in the column 'land'
-        'If DirectCast(sender, DataGridView).FindForm.Name = "frm_" & TableNamesInDatabase.Rows(3)(1).ToString Then '* if the current form is the 'Woonplaats'-form
-        '    For i = 0 To DirectCast(sender, DataGridView).Rows.Count - 1
-        '        'MsgBox(DirectCast(sender, DataGridView).Item(3, i).Value) DEBUG
-        '        Select Case DirectCast(sender, DataGridView).Item(3, i).Value.ToString
-        '            Case "1" 'Belgie
-        '                DirectCast(sender, DataGridView).Item(3, i).Value = "België"
-        '            Case "2" 'Nederland
-        '                DirectCast(sender, DataGridView).Item(3, i).Value = "Nederland"
-        '        End Select
-        '    Next
-        'End If
+    Private Sub dataGridView1_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+        changesWereMade = True
+    End Sub
+
+    Private Sub btnUpload_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim label1 As ShowAndHideLabel = CType(DirectCast(sender, FormButton).FindForm.Controls("GenericLabel_Actions"), ShowAndHideLabel)
+        Dim dgv As DataGridView = CType(DirectCast(sender, FormButton).FindForm.Controls("GenericDataGridView_Main"), DataGridView)
+
+        If dgv.CurrentCell IsNot dgv.Item(1, 0) Then
+            dgv.CurrentCell = dgv.Item(1, 0)
+        Else
+            dgv.CurrentCell = dgv.Item(1, 1)
+        End If
+        'Set focus on different cell so that the datagridview finishes the editing of records
+
+        If Not changesWereMade Then
+            label1.SetText("No changes detected. Upload canceled.", 3)
+            Exit Sub
+        End If
+
+        'Upload stuff
+        Dim table As String = TableNamesInDatabase(CInt(DirectCast(sender, FormButton).FindForm.Tag))(1).ToString
+        If Upload(data, table) Then
+            label1.SetText("Uploaded to database.", 3)
+        Else
+            label1.SetText("Upload failed.", 5)
+        End If
     End Sub
 End Module

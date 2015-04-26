@@ -28,6 +28,6 @@
 
     Private Sub PictureBox1_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PictureBox1.Paint
         Dim r As New Rectangle(0, 0, 500, 500)
-        e.Graphics.DrawImage(My.Resources.Lisa_Icon_Style_2_No_BG, r)
+        e.Graphics.DrawImage(My.Resources.Lisa_Temp_Icon, r)
     End Sub
 End Class
