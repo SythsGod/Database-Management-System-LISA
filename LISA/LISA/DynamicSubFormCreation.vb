@@ -6,17 +6,9 @@ Module DynamicSubFormCreation
     Public Sub CreateSubForm(ByVal buttonTag As Integer, ByVal name As String)
         data = AllTableInformation(buttonTag)
 
-        Dim form1 As New Form
-        With form1
-            .Size = New Size(1280, 720)
-            .Name = "frm_" & TableNamesInDatabase.Rows(buttonTag)(1).ToString
-            .FormBorderStyle = Windows.Forms.FormBorderStyle.None
-            .Tag = buttonTag
-            .StartPosition = FormStartPosition.CenterScreen
-            .BackColor = Color.White
-        End With
+        Dim form1 As New GenericForm("GenericForm_" & buttonTag.ToString)
 
-        Dim button1 As New FormButton
+        Dim button1 As New GenericButton
         With button1
             .Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
             .Name = "GenericButton_Upload"
@@ -40,7 +32,7 @@ Module DynamicSubFormCreation
                 .SetImage = i
             End With
 
-            AddHandler button2.Click, AddressOf ControlBoxButton_Click
+            AddHandler button2.Click, AddressOf ControlMouseClick
             AddHandler button2.MouseEnter, AddressOf ControlMouseEnter
             AddHandler button2.MouseLeave, AddressOf ControlMouseLeave
             form1.Controls.Add(button2)
@@ -116,21 +108,6 @@ Module DynamicSubFormCreation
         End If
     End Sub
 
-    Private Sub ControlBoxButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim btn As ControlBoxButton = DirectCast(sender, ControlBoxButton)
-
-        Select Case CInt(DirectCast(sender, Button).Tag)
-            Case 10 'Close
-                DirectCast(sender, ControlBoxButton).FindForm.Close()
-            Case 11 'Maximize
-                btn.Maximize()
-            Case 12 'Minimize
-                btn.Minimize()
-            Case 13 'Maximize to minimize
-                btn.Maximize()
-        End Select
-    End Sub
-
     'Unused (Remove later)
     'Private Sub ButtonPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
     '    Dim currForm As Form = DirectCast(sender, Button).FindForm
@@ -153,8 +130,8 @@ Module DynamicSubFormCreation
     End Sub
 
     Private Sub btnUpload_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim label1 As ShowAndHideLabel = CType(DirectCast(sender, FormButton).FindForm.Controls("GenericLabel_Actions"), ShowAndHideLabel)
-        Dim dgv As DataGridView = CType(DirectCast(sender, FormButton).FindForm.Controls("GenericDataGridView_Main"), DataGridView)
+        Dim label1 As ShowAndHideLabel = CType(DirectCast(sender, GenericButton).FindForm.Controls("GenericLabel_Actions"), ShowAndHideLabel)
+        Dim dgv As DataGridView = CType(DirectCast(sender, GenericButton).FindForm.Controls("GenericDataGridView_Main"), DataGridView)
 
         If dgv.CurrentCell IsNot dgv.Item(1, 0) Then
             dgv.CurrentCell = dgv.Item(1, 0)
@@ -169,7 +146,7 @@ Module DynamicSubFormCreation
         End If
 
         'Upload stuff
-        Dim table As String = TableNamesInDatabase(CInt(DirectCast(sender, FormButton).FindForm.Tag))(1).ToString
+        Dim table As String = TableNamesInDatabase(CInt(DirectCast(sender, GenericButton).FindForm.Tag))(1).ToString
         If Upload(data, table) Then
             label1.SetText("Uploaded to database.", 3)
         Else

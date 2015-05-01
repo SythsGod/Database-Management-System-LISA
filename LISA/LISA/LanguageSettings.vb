@@ -1,11 +1,6 @@
 ﻿Module LanguageSettings
     Public Sub CreateForm()
-        Dim form1 As New Form
-        form1.BackColor = Color.White
-        form1.FormBorderStyle = FormBorderStyle.None
-        form1.Name = "GenericForm_LanguageSettings"
-        form1.Size = New Size(700, 400)
-        form1.StartPosition = FormStartPosition.CenterScreen
+        Dim form1 As New GenericForm("GenericForm_LanguageSettings", New Size(700, 400))
 
         CreateControlBox(form1)
         CreateFormButtons(form1)
@@ -14,13 +9,8 @@
         AddHandler form1.MouseUp, AddressOf MoveForms.MouseUp
         AddHandler form1.MouseMove, AddressOf MoveForms.MouseMove
         AddHandler form1.MouseDown, AddressOf MoveForms.MouseDown
-        AddHandler form1.FormClosing, AddressOf Form_Closing
+        AddHandler form1.FormClosing, AddressOf MoveForms.Closing
         form1.Show()
-    End Sub
-
-    Private Sub Form_Closing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs)
-        LISA.Show()
-        DirectCast(sender, Form).Dispose()
     End Sub
 
     Private Sub CreateControlBox(ByVal frm As Form)
@@ -32,7 +22,11 @@
             btn.Size = New Size(30, 30)
             btn.Tag = "1" & i
 
-            AddHandler btn.Click, AddressOf ControlBoxButton_Click
+            If i = 1 Then
+                btn.Disabled = True
+            End If
+
+            AddHandler btn.Click, AddressOf ControlMouseClick
             If i <> 1 Then
                 AddHandler btn.MouseEnter, AddressOf ControlMouseEnter
             End If
@@ -46,7 +40,7 @@
         Dim x As Integer = 100
 
         For i = 0 To 7
-            Dim btn As New FormButton
+            Dim btn As New GenericButton
 
             btn.Location = New Point(x, 60 + (75 * f))
             btn.Name = "GenericFormButton_" & i
@@ -76,27 +70,16 @@
         frm.Controls.Add(lbl)
     End Sub
 
-    Private Sub ControlBoxButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim btn As ControlBoxButton = DirectCast(sender, ControlBoxButton)
-
-        Select Case CInt(DirectCast(sender, Button).Tag)
-            Case 10 'Close
-                DirectCast(sender, ControlBoxButton).FindForm.Close()
-            Case 12 'Minimize
-                btn.Minimize()
-        End Select
-    End Sub
-
     Private Sub ButtonForm_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        currentLang = CInt(DirectCast(sender, FormButton).Tag) + 2
+        currentLang = CInt(DirectCast(sender, GenericButton).Tag) + 2
         SaveSetting(My.Application.Info.ProductName, "General", "Language Setting", currentLang.ToString)
 
-        For Each btn As FormButton In LISA.Controls.OfType(Of FormButton)()
+        For Each btn As GenericButton In LISA.Controls.OfType(Of GenericButton)()
             If CInt(btn.Tag) < 10 Then
                 btn.Text = TableNamesInDatabase(CInt(btn.Tag))(currentLang).ToString
             End If
         Next
 
-        DirectCast(sender, FormButton).FindForm.Close()
+        DirectCast(sender, GenericButton).FindForm.Close()
     End Sub
 End Module

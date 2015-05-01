@@ -54,7 +54,7 @@ Public Class LISA
 
     'Creation of a single button
     Private Sub CreateButton(ByVal i As Integer)
-        Dim button1 As New FormButton
+        Dim button1 As New GenericButton
 
         With button1
             .Name = "btn_" & TableNamesInDatabase.Rows(i)(1).ToString 'Set the name

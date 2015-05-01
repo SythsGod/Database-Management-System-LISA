@@ -38,7 +38,6 @@ G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.pdb
 G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe
 G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.pdb
 G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.xml
-G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\ResolveAssemblyReference.cache
 G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.LISA.resources
 G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.Resources.resources
 G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
@@ -81,3 +80,7 @@ H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.Resources.res
 H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
 H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.test_form.resources
 H:\Database-Management-System-LISA-master\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\Interop.EIDLIBCTRLLib.dll
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbproj.ResolveComReference.cache
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe.config
+G:\School\GIP\Database-Management-System-LISA\LISA\LISA\obj\Debug\Interop.EIDLIBCTRLLib.dll

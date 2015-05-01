@@ -39,4 +39,8 @@
         MouseIsDown = False
         AlreadyLocked = False
     End Sub
+    Public Sub Closing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs)
+        LISA.Show()
+        DirectCast(sender, Form).Dispose()
+    End Sub
 End Module

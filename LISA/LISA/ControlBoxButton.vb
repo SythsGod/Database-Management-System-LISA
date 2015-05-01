@@ -11,6 +11,7 @@ Public NotInheritable Class ControlBoxButton
     Private img_LangSettings(1) As Bitmap
 
     Private isOnHover As Boolean = False
+    Private isDisabled As Boolean = False
 
     Public Sub New()
         'Do this with a loop to make it loop prettier?
@@ -81,16 +82,25 @@ Public NotInheritable Class ControlBoxButton
         End Set
     End Property
 
+    Public Property Disabled() As Boolean
+        Get
+            Return Me.isDisabled
+        End Get
+        Set(value As Boolean)
+            Me.isDisabled = value
+        End Set
+    End Property
+
     Public Sub Minimize()
         Me.FindForm.WindowState = FormWindowState.Minimized
     End Sub
 
     Public Sub Maximize()
-        If Me.FindForm.WindowState = FormWindowState.Normal Then
+        If Me.FindForm.WindowState = FormWindowState.Normal And Not Me.isDisabled Then
             Me.FindForm.WindowState = FormWindowState.Maximized
             Me.SetImage = 3
             Me.Tag = 13
-        Else
+        ElseIf Not Me.isDisabled Then
             Me.FindForm.WindowState = FormWindowState.Normal
             Me.SetImage = 1
             Me.Tag = 11

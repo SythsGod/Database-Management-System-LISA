@@ -15,6 +15,58 @@ LISA
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Close_2_0">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Close_2_1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_0_0">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_0_1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_1_0">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_1_1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Minimize_2_0">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Button_Minimize_2_1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Language_Settings_Icon__Active_">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Language_Settings_Icon__Inactive_">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Lisa_Icon_Style_2_No_BG">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Lisa_Temp_Icon">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.Sansation_Regular">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
 </member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_0">
 	<summary>
   Looks up a localized string similar to 185.13.227.5.
