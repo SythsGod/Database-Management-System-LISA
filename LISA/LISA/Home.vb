@@ -90,7 +90,7 @@ Public Class LISA
                 .Location = New Point(Me.ClientRectangle.Width - 30 * (i + 1) + 1, -1)
                 .Size = New Size(30, 30)
                 .BackColor = Color.Transparent
-                .SetImage = i
+                .SetImage(i)
             End With
 
             AddHandler button1.Click, AddressOf ControlBoxButton_Click
@@ -139,7 +139,7 @@ Public Class LISA
             .BackgroundImage = My.Resources.Language_Settings_Icon__Inactive_
             .FlatAppearance.MouseDownBackColor = Color.Transparent
             .FlatAppearance.MouseOverBackColor = Color.Transparent
-            .SetImage = 4
+            .SetImage(4)
         End With
 
         AddHandler button1.MouseEnter, AddressOf ControlMouseEnter

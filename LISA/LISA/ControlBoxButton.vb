@@ -38,42 +38,38 @@ Public NotInheritable Class ControlBoxButton
     End Sub
 
     'Set the image using the tag (This could probably be done in a different, better way)
-    Public WriteOnly Property SetImage() As Integer
-        Set(ByVal value As Integer)
-            Select Case value
-                Case 0
-                    Me.BackgroundImage = img_Close(0)
-                Case 1
-                    Me.BackgroundImage = img_Maximize(0)
-                Case 2
-                    Me.BackgroundImage = img_Minimize(0)
-                Case 3
-                    Me.BackgroundImage = img_Maximize(2)
-                Case 4
-                    Me.BackgroundImage = img_LangSettings(0)
-            End Select
-        End Set
-    End Property
+    Public Sub SetImage(ByVal value As Integer)
+        Select Case value
+            Case 0
+                Me.BackgroundImage = img_Close(0)
+            Case 1
+                Me.BackgroundImage = img_Maximize(0)
+            Case 2
+                Me.BackgroundImage = img_Minimize(0)
+            Case 3
+                Me.BackgroundImage = img_Maximize(2)
+            Case 4
+                Me.BackgroundImage = img_LangSettings(0)
+        End Select
+    End Sub
 
     'Change the image (should only be used together with a MouseHover event
-    Public WriteOnly Property SetHoverImage() As Integer
-        Set(ByVal value As Integer)
-            If isOnHover Then
-                Select Case value
-                    Case 0 'Close
-                        Me.BackgroundImage = img_Close(1)
-                    Case 1 'Maximize
-                        Me.BackgroundImage = img_Maximize(1)
-                    Case 2 'Minimize
-                        Me.BackgroundImage = img_Minimize(1)
-                    Case 3 'Maximize 2
-                        Me.BackgroundImage = img_Maximize(3)
-                    Case 4
-                        Me.BackgroundImage = img_LangSettings(1)
-                End Select
-            End If
-        End Set
-    End Property
+    Public Sub SetHoverImage(ByVal value As Integer)
+        If isOnHover Then
+            Select Case value
+                Case 0 'Close
+                    Me.BackgroundImage = img_Close(1)
+                Case 1 'Maximize
+                    Me.BackgroundImage = img_Maximize(1)
+                Case 2 'Minimize
+                    Me.BackgroundImage = img_Minimize(1)
+                Case 3 'Maximize 2
+                    Me.BackgroundImage = img_Maximize(3)
+                Case 4
+                    Me.BackgroundImage = img_LangSettings(1)
+            End Select
+        End If
+    End Sub
 
     'Set the hover (I don't really know if this is necessary, but ok, it's here anyway)
     Public WriteOnly Property SetHover() As Boolean
@@ -98,11 +94,11 @@ Public NotInheritable Class ControlBoxButton
     Public Sub Maximize()
         If Me.FindForm.WindowState = FormWindowState.Normal And Not Me.isDisabled Then
             Me.FindForm.WindowState = FormWindowState.Maximized
-            Me.SetImage = 3
+            Me.SetImage(3)
             Me.Tag = 13
         ElseIf Not Me.isDisabled Then
             Me.FindForm.WindowState = FormWindowState.Normal
-            Me.SetImage = 1
+            Me.SetImage(1)
             Me.Tag = 11
         End If
     End Sub

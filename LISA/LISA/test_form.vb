@@ -92,7 +92,7 @@ Public Class test_form
             Dim btn As New ControlBoxButton
             btn.Location = New Point(frm.ClientRectangle.Width - 30 * (i + 1) + 1, -1)
             btn.Name = "GenericControlBoxButton_" & i
-            btn.SetImage = i
+            btn.SetImage(i)
             btn.Size = New Size(30, 30)
             btn.Tag = "1" & i
 

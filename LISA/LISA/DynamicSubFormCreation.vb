@@ -21,23 +21,6 @@ Module DynamicSubFormCreation
         AddHandler button1.Click, AddressOf btnUpload_Click
         form1.Controls.Add(button1)
 
-        'Control Boxes
-        For i = 0 To 2
-            Dim button2 As New ControlBoxButton
-            With button2
-                .Name = "GenericControlBoxButton_" & i
-                .Tag = "1" & i
-                .Location = New Point(form1.ClientRectangle.Width - 30 * (i + 1) + 1, -1)
-                .Size = New Size(30, 30)
-                .SetImage = i
-            End With
-
-            AddHandler button2.Click, AddressOf ControlMouseClick
-            AddHandler button2.MouseEnter, AddressOf ControlMouseEnter
-            AddHandler button2.MouseLeave, AddressOf ControlMouseLeave
-            form1.Controls.Add(button2)
-        Next
-
         Dim label1 As New Label
         Dim label2 As New ShowAndHideLabel("GenericLabel_Actions")
         With label1
