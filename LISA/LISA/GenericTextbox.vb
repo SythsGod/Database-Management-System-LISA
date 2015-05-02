@@ -8,6 +8,7 @@
         Me.Multiline = True
         Me.Name = "GenericTextbox"
         Me.Size = New Size(300, 35)
+        Me.Width = 300
     End Sub
     Public Sub New(ByVal name As String)
         Init()
