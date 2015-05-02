@@ -33,7 +33,7 @@ Module DatabaseRetrieval
             adp.Fill(TEMP_DataSet, table)
         Catch ex As MySqlException
             MsgBox("Error:" & ex.Message)
-            LISA.Close()
+            Stop
         End Try
 
         adp.Dispose()

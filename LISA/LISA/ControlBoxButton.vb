@@ -9,6 +9,7 @@ Public NotInheritable Class ControlBoxButton
     Private img_Minimize(1) As Bitmap
     Private img_Maximize(3) As Bitmap
     Private img_LangSettings(1) As Bitmap
+    Private img_RegisterForm(1) As Bitmap
 
     Private isOnHover As Boolean = False
     Private isDisabled As Boolean = False
@@ -25,12 +26,15 @@ Public NotInheritable Class ControlBoxButton
         img_Maximize(3) = My.Resources.Button_Maximize_2_1_1
         img_LangSettings(0) = My.Resources.Language_Settings_Icon__Inactive_
         img_LangSettings(1) = My.Resources.Language_Settings_Icon__Active_
+        img_RegisterForm(0) = My.Resources.Register_Form_Icon__Inactive_
+        img_RegisterForm(1) = My.Resources.Register_Form_Icon__Active_
 
         Me.BackgroundImageLayout = ImageLayout.Center 'Set the ImageBackground to center
         Me.Anchor = AnchorStyles.Top Or AnchorStyles.Right 'Anchor the buttons on Top-Right,
         Me.BackColor = Color.Transparent
         Me.FlatStyle = Windows.Forms.FlatStyle.Flat
-        Me.FlatAppearance.MouseOverBackColor = Nothing
+        Me.FlatAppearance.MouseOverBackColor = Color.Transparent
+        Me.FlatAppearance.MouseDownBackColor = Color.Transparent
         Me.FlatAppearance.BorderColor = Color.White
         'Me.FlatAppearance.BorderSize = 0
         Me.Size = New Size(30, 26)
@@ -50,6 +54,8 @@ Public NotInheritable Class ControlBoxButton
                 Me.BackgroundImage = img_Maximize(2)
             Case 4
                 Me.BackgroundImage = img_LangSettings(0)
+            Case 5
+                Me.BackgroundImage = img_RegisterForm(0)
         End Select
     End Sub
 
@@ -67,6 +73,8 @@ Public NotInheritable Class ControlBoxButton
                     Me.BackgroundImage = img_Maximize(3)
                 Case 4
                     Me.BackgroundImage = img_LangSettings(1)
+                Case 5
+                    Me.BackgroundImage = img_RegisterForm(1)
             End Select
         End If
     End Sub

@@ -74,3 +74,7 @@ End Module
 '   12 = Minimize
 '   13 = Maximize To Minimize
 '   14 = Language Picker
+'   15 = Register Form
+'
+'Colors:
+'   Blue Form Buttons: Hex - #3998d6 | Argb - 57,152,214

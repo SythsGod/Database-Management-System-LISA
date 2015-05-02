@@ -1,5 +1,5 @@
 ﻿Module RegisterForm
-    Sub New()
+    Public Sub Init()
         Dim form1 As New GenericForm("GenericForm_Register")
         Dim button1 As New GenericButton
 

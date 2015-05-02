@@ -104,14 +104,14 @@
     <Compile Include="GenericTextbox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="RegisterForm.vb" />
-    <Compile Include="Globals.vb" />
-    <Compile Include="Home.Designer.vb">
-      <DependentUpon>Home.vb</DependentUpon>
+    <Compile Include="Main.Designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
     </Compile>
-    <Compile Include="Home.vb">
+    <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RegisterForm.vb" />
+    <Compile Include="Globals.vb" />
     <Compile Include="LanguageSettings.vb" />
     <Compile Include="MoveForms.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -146,9 +146,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Home.resx">
-      <DependentUpon>Home.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -303,6 +300,12 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Register Form Icon %28Active%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Register Form Icon %28Inactive%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

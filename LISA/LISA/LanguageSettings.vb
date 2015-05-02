@@ -1,39 +1,19 @@
 ﻿Module LanguageSettings
-    Public Sub CreateForm()
+    Public Sub Init()
         Dim frm As New GenericForm("GenericForm_LanguageSettings", New Size(700, 400))
 
         CreateFormButtons(frm)
         CreateLabel(frm)
 
         DirectCast(frm.Controls("GenericControlBoxButton1"), ControlBoxButton).Disabled = True
+        RemoveHandler DirectCast(frm.Controls("GenericControlBoxButton1"), ControlBoxButton).MouseEnter, AddressOf FormDesignAndControl.ControlMouseEnter
+        RemoveHandler DirectCast(frm.Controls("GenericControlBoxButton1"), ControlBoxButton).MouseLeave, AddressOf FormDesignAndControl.ControlMouseLeave
 
         AddHandler frm.MouseUp, AddressOf MoveForms.MouseUp
         AddHandler frm.MouseMove, AddressOf MoveForms.MouseMove
         AddHandler frm.MouseDown, AddressOf MoveForms.MouseDown
         AddHandler frm.FormClosing, AddressOf MoveForms.Closing
         frm.Show()
-    End Sub
-
-    Private Sub CreateControlBox(ByVal frm As Form)
-        For i = 0 To 2
-            Dim btn As New ControlBoxButton
-            btn.Location = New Point(frm.ClientRectangle.Width - 30 * (i + 1) + 1, -1)
-            btn.Name = "GenericControlBoxButton_" & i
-            btn.SetImage(i)
-            btn.Size = New Size(30, 30)
-            btn.Tag = "1" & i
-
-            If i = 1 Then
-                btn.Disabled = True
-            End If
-
-            AddHandler btn.Click, AddressOf ControlMouseClick
-            If i <> 1 Then
-                AddHandler btn.MouseEnter, AddressOf ControlMouseEnter
-            End If
-            AddHandler btn.MouseLeave, AddressOf ControlMouseLeave
-            frm.Controls.Add(btn)
-        Next
     End Sub
 
     Private Sub CreateFormButtons(ByVal frm As Form)
@@ -75,7 +55,7 @@
         currentLang = CInt(DirectCast(sender, GenericButton).Tag) + 2
         SaveSetting(My.Application.Info.ProductName, "General", "Language Setting", currentLang.ToString)
 
-        For Each btn As GenericButton In LISA.Controls.OfType(Of GenericButton)()
+        For Each btn As GenericButton In Main.Controls.OfType(Of GenericButton)()
             If CInt(btn.Tag) < 10 Then
                 btn.Text = TableNamesInDatabase(CInt(btn.Tag))(currentLang).ToString
             End If
