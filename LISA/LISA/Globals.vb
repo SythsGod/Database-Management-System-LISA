@@ -12,6 +12,7 @@ Module Globals
     Public languages() As String = {"Nederlands", "English", "Français", "Español", "Deutsch", "中国", "", ""}
     Public registerEntries() As String = {"Voornaam", "Naam", "Geslacht", "Geboortedatum", "Geboorteplaats", "Nationaliteit", "Straatnaam", "Nummer", "Busnummer", "Postcode", "Rijksregister Nummer", "Telefoon/Mobiel", "Email", "Moedertaal", "Spreektaal", "Klas", "Broes/Zussen", "Opmerkingen verblijfsAd", "Godskeuze", "Opmerkingen tucht", "Studietoelage"}
     Public needsDropDown() As Boolean = {False, False, True, False, False, True, False, False, False, False, False, False, False, True, True, True, True, False, True, False, False}
+    Public registerForm_ As New GenericForm("GenericForm_Register")
 
     Public Sub GetServerVars()
         'Change this. I HATE IT.

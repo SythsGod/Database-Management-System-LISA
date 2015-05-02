@@ -98,6 +98,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FormDesignAndControl.vb" />
+    <Compile Include="GenericCombobox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GenericForm.vb">
       <SubType>Form</SubType>
     </Compile>

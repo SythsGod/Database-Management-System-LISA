@@ -3,7 +3,7 @@
 
     Public Sub New(ByVal name As String, ByVal lcation As Point, ByVal tag As Integer)
         Me.DropDownStyle = ComboBoxStyle.DropDownList
-        Me.Font = New Font(Me.FindForm.Font.FontFamily, 17)
+        Me.Font = New Font(Main.Font.FontFamily, 17)
         Me.Location = lcation
         Me.Name = name
         Me.Tag = tag

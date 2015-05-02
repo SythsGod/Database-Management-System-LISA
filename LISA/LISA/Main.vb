@@ -106,7 +106,7 @@
 
     Private Sub GenericButtonRegister_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         DirectCast(sender, ControlBoxButton).FindForm.Hide()
-
-        RegisterForm.Init()
+        If registerForm_.hasBeenCreated Then registerForm_.Show()
+        If Not registerForm_.hasBeenCreated Then RegisterForm.Init()
     End Sub
 End Class

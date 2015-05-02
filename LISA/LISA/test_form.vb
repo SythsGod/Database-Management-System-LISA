@@ -15,76 +15,6 @@ Public Class test_form
 
         GetServerVars()
         CreateControlBox(Me)
-
-        Dim btn As New Button
-        btn.Name = "btnUpload"
-        btn.Size = New Size(100, 50)
-        btn.Location = New Point(Me.Width - 120, Me.Height - 70)
-        btn.Text = "Upload"
-        AddHandler btn.Click, AddressOf Button_Upload
-        Me.Controls.Add(btn)
-
-        'And a "Woooh" for success! And another "Woooh" for not being useful!
-        For j = 0 To 6
-            For i = 0 To 2
-                Dim lcation As Point = New Point(90 + 400 * i, 70 + 75 * j)
-
-                If needsDropDown(i + (j * 3)) Then
-                    Dim lst As New ComboBox
-                    lst.Name = "GenericCombobox" & i + (j * 3)
-                    lst.Location = lcation
-                    lst.Width = 300
-                    lst.Tag = i + (j * 3)
-                    lst.DropDownStyle = ComboBoxStyle.DropDownList
-                    lst.Font = New Font(Me.Font.FontFamily, 17)
-
-                    Me.Controls.Add(lst)
-                Else
-                    Dim txt As New GenericTextbox("GenericTextbox" & i + (j * 3), lcation)
-                    txt.Width = 300
-                    Me.Controls.Add(txt)
-                End If
-
-                Dim lbl As New Label
-                lbl.Location = New Point(lcation.X, lcation.Y - 28)
-                lbl.TextAlign = ContentAlignment.BottomLeft
-                lbl.Text = registerEntries(i + (j * 3)) & ":"
-                lbl.Width = 300
-                Me.Controls.Add(lbl)
-            Next
-        Next
-
-        For Each ctrl In Me.Controls.OfType(Of ComboBox)()
-            Select Case ctrl.Tag.ToString
-                Case "2"
-                    ctrl.Items.AddRange(New String() {"M", "V"})
-                    ctrl.SelectedIndex = 1
-                Case "5"
-                    ctrl.Items.AddRange(New String() {"Belg", "Nederlander", "Duits", "Amerikaan"})
-                    ctrl.SelectedIndex = 0
-                Case "13"
-                    ctrl.Items.AddRange(New String() {"Nederlands", "Engels", "Duits"})
-                    ctrl.SelectedIndex = 0
-                Case "14"
-                    ctrl.Items.AddRange(New String() {"Nederlands", "Engels", "Duits"})
-                    ctrl.SelectedIndex = 0
-                Case "15"
-                    ctrl.Items.AddRange(New String() {"6 Informatica", "6 STW"})
-                    ctrl.SelectedIndex = 1
-                Case "16"
-                    ctrl.Items.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
-                    ctrl.SelectedIndex = 0
-                Case "18"
-                    ctrl.Items.AddRange(New String() {"Katholiek", "Zedeleer"})
-                    ctrl.SelectedIndex = 1
-                Case "20"
-                    ctrl.Items.AddRange(New String() {"Ja", "Nee"})
-                    ctrl.SelectedIndex = 1
-            End Select
-        Next
-
-        Me.Controls("GenericTextbox12").Font = New Font(Me.Font.FontFamily, 12)
-        AddHandler Me.Controls("GenericTextbox3").KeyPress, AddressOf Birthdate_Keypress
     End Sub
 
     Private Sub CreateControlBox(ByVal frm As Form)
@@ -101,36 +31,6 @@ Public Class test_form
             AddHandler btn.MouseLeave, AddressOf ControlMouseLeave
             frm.Controls.Add(btn)
         Next
-    End Sub
-
-    Private Sub Main_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown
-        Dim conditions As Boolean
-        conditions = e.X >= 0 And e.X <= Me.ClientRectangle.Width And e.Y >= 0 And e.Y <= 50
-
-        MouseIsDown = conditions
-    End Sub
-
-    Private Function ThinkOfAGoodName(ByVal e As System.Windows.Forms.MouseEventArgs) As Point
-        If Not AlreadyLocked Then
-            Dim p As Point
-            p = New Point(e.X, e.Y)
-            AlreadyLocked = True
-            Return p
-        Else
-            Return setPoint
-        End If
-    End Function
-
-    Private Sub Main_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
-        If MouseIsDown Then
-            setPoint = ThinkOfAGoodName(e)
-            Me.Location = New Point(Control.MousePosition.X - setPoint.X, Control.MousePosition.Y - setPoint.Y)
-        End If
-    End Sub
-
-    Private Sub Main_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
-        MouseIsDown = False
-        AlreadyLocked = False
     End Sub
 
     Private Sub Button_Upload(ByVal sender As Object, ByVal e As System.EventArgs)
