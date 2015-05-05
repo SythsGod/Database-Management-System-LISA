@@ -60,28 +60,42 @@ Module RegisterForm
             Select Case ctrl.Tag.ToString
                 Case "2"
                     ctrl.Items.AddRange(New String() {"M", "V"})
-                    ctrl.SelectedIndex = 1
+                    ctrl.SelectedIndex = 0
                 Case "5"
-                    ctrl.Items.AddRange(New String() {"Belg", "Nederlander", "Duits", "Amerikaan"})
+                    For i = 0 To AllTableInformation(4).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(AllTableInformation(4).Tables(0).Rows(i)(2).ToString)
+                    Next
+
                     ctrl.SelectedIndex = 0
                 Case "13"
-                    ctrl.Items.AddRange(New String() {"Nederlands", "Engels", "Duits"})
+                    For i = 0 To AllTableInformation(2).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(AllTableInformation(2).Tables(0).Rows(i)(1).ToString)
+                    Next
+
                     ctrl.SelectedIndex = 0
                 Case "14"
-                    ctrl.Items.AddRange(New String() {"Nederlands", "Engels", "Duits"})
+                    For i = 0 To AllTableInformation(2).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(AllTableInformation(2).Tables(0).Rows(i)(1).ToString)
+                    Next
+
                     ctrl.SelectedIndex = 0
                 Case "15"
-                    ctrl.Items.AddRange(New String() {"6 Informatica", "6 STW"})
-                    ctrl.SelectedIndex = 1
+                    For i = 0 To AllTableInformation(10).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(AllTableInformation(10).Tables(0).Rows(i)(2).ToString)
+                    Next
+                    ctrl.SelectedIndex = 0
                 Case "16"
                     ctrl.Items.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
                     ctrl.SelectedIndex = 0
                 Case "18"
-                    ctrl.Items.AddRange(New String() {"Katholiek", "Zedeleer"})
-                    ctrl.SelectedIndex = 1
+                    For i = 0 To AllTableInformation(8).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(AllTableInformation(8).Tables(0).Rows(i)(1).ToString)
+                    Next
+
+                    ctrl.SelectedIndex = 0
                 Case "20"
-                    ctrl.Items.AddRange(New String() {"Ja", "Nee"})
-                    ctrl.SelectedIndex = 1
+                    ctrl.Items.AddRange(New String() {"Nee", "Ja"})
+                    ctrl.SelectedIndex = 0
             End Select
         Next
 

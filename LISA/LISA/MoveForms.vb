@@ -5,7 +5,7 @@
     Private Function LockOnMouseDown(ByVal e As System.Windows.Forms.MouseEventArgs) As Point 'Think of a good name for this function (Job: Locks the mouse coords on MouseDown)
         '1. Lock the position of your mouse (on the form) after mouse went down
         '2. Return said point
-        '3. If the point had already been set we're just returning the previously set value
+        '3. If the point had already been set we're just returning the previously set value!
 
         If Not AlreadyLocked Then
             Dim p As Point

@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="AppUse.vb" />
     <Compile Include="ControlBoxButton.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -293,16 +294,6 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="EIDLIBCTRLLib">
-      <Guid>{7705C6CB-5A66-4F92-B296-2B34ED21745C}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Register Form Icon %28Active%29.png" />

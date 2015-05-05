@@ -2,17 +2,16 @@
 Imports MySql.Data.MySqlClient
 
 Module Globals
-    Public LangSwitch As Boolean = False 'If false lang="Dutch" else lang="English"
     Public ServerVars(3) As String
     Public TableNamesInDatabase As New DataTable
     Public AllTableInformation As New Dictionary(Of Integer, DataSet)
-    Public isConnected As Boolean
     Public myConn As New MySqlConnection
     Public currentLang As Integer = 2 '= Dutch
     Public languages() As String = {"Nederlands", "English", "Français", "Español", "Deutsch", "中国", "", ""}
+    Public langButtons() As String = {""}
     Public registerEntries() As String = {"Voornaam", "Naam", "Geslacht", "Geboortedatum", "Geboorteplaats", "Nationaliteit", "Straatnaam", "Nummer", "Busnummer", "Postcode", "Rijksregister Nummer", "Telefoon/Mobiel", "Email", "Moedertaal", "Spreektaal", "Klas", "Broes/Zussen", "Opmerkingen verblijfsAd", "Godskeuze", "Opmerkingen tucht", "Studietoelage"}
     Public needsDropDown() As Boolean = {False, False, True, False, False, True, False, False, False, False, False, False, False, True, True, True, True, False, True, False, False}
-    Public registerForm_ As New GenericForm("GenericForm_Register")
+    Public registerForm_ As New GenericForm("GenericForm_Register", True)
 
     Public Sub GetServerVars()
         'Change this. I HATE IT.

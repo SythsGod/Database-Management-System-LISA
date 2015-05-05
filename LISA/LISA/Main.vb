@@ -18,6 +18,7 @@
         AddButtons(Me)
         AddLanguageButton(Me)
         AddRegisterButton(Me)
+        AddCopyRightLabel(Me)
 
         AddHandler Me.MouseUp, AddressOf MoveForms.MouseUp
         AddHandler Me.MouseMove, AddressOf MoveForms.MouseMove
@@ -42,7 +43,7 @@
         Dim f As Integer = 0
         Dim g As Integer = 0
 
-        For i = 0 To TableNamesInDatabase.Rows.Count - 1
+        For i = 0 To TableNamesInDatabase.Rows.Count - 2
             Dim btn As New GenericButton
 
             btn.Location = New Point(180 + 500 * f, 132 + ((75 + 20) * (i - g)))
@@ -95,7 +96,7 @@
     End Sub
 
     Private Sub GenericButtonForm_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        DirectCast(sender, GenericButton).FindForm.Hide()
+        Me.Hide()
 
         DynamicSubFormCreation.Init(CInt(DirectCast(sender, GenericButton).Tag), TableNamesInDatabase(CInt(DirectCast(sender, GenericButton).Tag))(currentLang).ToString)
     End Sub
@@ -108,5 +109,11 @@
         DirectCast(sender, ControlBoxButton).FindForm.Hide()
         If registerForm_.hasBeenCreated Then registerForm_.Show()
         If Not registerForm_.hasBeenCreated Then RegisterForm.Init()
+    End Sub
+
+    Private Sub AddCopyRightLabel(ByVal frm As Form)
+        Dim lbl As New Label With {.Text = "© 2014 - " & Date.Now.Year, .Name = "GenericLabel", .Font = New Font("Tahoma", 8)}
+        lbl.Location = New Point(CInt(frm.ClientRectangle.Width / 2 - lbl.Width / 2), frm.ClientRectangle.Height - 20)
+        frm.Controls.Add(lbl)
     End Sub
 End Class

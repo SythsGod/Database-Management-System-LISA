@@ -1,5 +1,6 @@
 ﻿Public Class GenericTextbox
     Inherits TextBox
+	'Rand
     Private fnt As Font = New Font(Me.Font.FontFamily, Me.FontHeight + 5, FontStyle.Regular)
     Private Sub Init()
         Me.BorderStyle = Windows.Forms.BorderStyle.Fixed3D

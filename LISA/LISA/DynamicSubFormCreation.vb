@@ -7,7 +7,8 @@ Module DynamicSubFormCreation
     Public Sub Init(ByVal buttonTag As Integer, ByVal name As String)
         data = AllTableInformation(buttonTag)
 
-        Dim frm As New GenericForm("GenericForm_" & buttonTag.ToString)
+        Dim frm As New GenericForm("GenericForm_" & buttonTag.ToString, True)
+        frm.Tag = buttonTag
 
         Dim button1 As New GenericButton
         With button1
@@ -32,7 +33,7 @@ Module DynamicSubFormCreation
             .Text = name & ":" 'Use language settings to determine the text
             .Width = 150
         End With
-        label2.Location = New Point(20, frm.Height - 10 - label2.Height)
+        label2.Location = New Point(20, frm.Height - 80 - label2.Height)
         frm.Controls.Add(label1)
         frm.Controls.Add(label2)
 

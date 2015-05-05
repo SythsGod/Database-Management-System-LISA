@@ -4,7 +4,7 @@ Imports System.Windows.Forms
 
 Public NotInheritable Class ControlBoxButton
     Inherits Button
-
+	'Random
     Private img_Close(1) As Bitmap
     Private img_Minimize(1) As Bitmap
     Private img_Maximize(3) As Bitmap

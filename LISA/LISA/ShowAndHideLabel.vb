@@ -1,6 +1,6 @@
 ﻿Public Class ShowAndHideLabel
     Inherits Label
-
+	'rand
     Private WithEvents Timer As New Timer
     Private mCounter As Integer
     Private mLimit As Integer

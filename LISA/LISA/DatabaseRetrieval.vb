@@ -4,8 +4,9 @@ Imports MySql.Data.MySqlClient
 Module DatabaseRetrieval
     Public Sub OpenConnection()
         myConn.Close()
-        myConn.ConnectionString = "server=" & ServerVars(0) & ";User id=" & ServerVars(1) & ";password=" & ServerVars(2) & ";database=" & ServerVars(3)
+        myConn.ConnectionString = "server=" & ServerVars(0) & ";User id=" & ServerVars(1) & ";password=" & ServerVars(2) & ";database=" & ServerVars(3) & ";Allow Zero Datetime=True"
         'myConn.ConnectionString = "Server=" & ServerVars(0) & ";Database=" & ServerVars(3) & ";Uid=" & ServerVars(1) & ";Pwd=" & ServerVars(2)
+
 
         Try
             myConn.Open()
@@ -32,7 +33,7 @@ Module DatabaseRetrieval
             adp.FillSchema(TEMP_DataSet, SchemaType.Source, table) 'Add primary key to dataset
             adp.Fill(TEMP_DataSet, table)
         Catch ex As MySqlException
-            MsgBox("Error:" & ex.Message)
+            MsgBox("Error: " & ex.Message)
             Stop
         End Try
 

@@ -2,6 +2,8 @@
     Inherits Form
 
     Private mHasBeenCreated As Boolean
+    Private mHasControlbox As Boolean
+
     Sub Init()
         Me.BackColor = Color.White
         Me.mHasBeenCreated = False
@@ -9,18 +11,19 @@
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         Me.Size = New Size(1280, 720)
         Me.StartPosition = FormStartPosition.CenterScreen
-    End Sub
-    Sub New(ByVal name As String)
-        Init()
-        Me.Name = name
-        AddControlBox(Me)
-    End Sub
 
-    Sub New(ByVal name As String, ByVal size As Size)
+        AddCopyRightLabel(Me)
+    End Sub
+    Sub New(ByVal name As String, ByVal needsControlbox As Boolean)
         Init()
         Me.Name = name
-        Me.Size = size
-        AddControlBox(Me)
+
+        If needsControlbox Then
+            AddControlBox(Me)
+            Me.mHasControlbox = True
+        Else
+            Me.mHasControlbox = False
+        End If
     End Sub
 
     Public Property hasBeenCreated() As Boolean
@@ -48,5 +51,11 @@
 
             frm.Controls.Add(btn)
         Next
+    End Sub
+
+    Private Sub AddCopyRightLabel(ByVal frm As Form)
+        Dim lbl As New Label With {.Text = "© 2014 - " & Date.Now.Year, .Name = "GenericLabel", .Font = New Font("Tahoma", 8)}
+        lbl.Location = New Point(CInt(frm.ClientRectangle.Width / 2 - lbl.Width / 2), frm.ClientRectangle.Height - 20)
+        frm.Controls.Add(lbl)
     End Sub
 End Class
