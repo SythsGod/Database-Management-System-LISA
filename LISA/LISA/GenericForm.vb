@@ -4,6 +4,11 @@
     Private mHasBeenCreated As Boolean
     Private mHasControlbox As Boolean
 
+    Private m_backcolor As Color
+    Private m_opacity As Double
+    Private m_transparent As Boolean
+    Private m_transparentColor As Color
+
     Sub Init()
         Me.BackColor = Color.White
         Me.mHasBeenCreated = False
@@ -11,6 +16,13 @@
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         Me.Size = New Size(1280, 720)
         Me.StartPosition = FormStartPosition.CenterScreen
+
+        SetStyle(ControlStyles.SupportsTransparentBackColor, True)
+        SetStyle(ControlStyles.Opaque, False)
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+        SetStyle(ControlStyles.UserPaint, True)
+        UpdateStyles()
 
         AddCopyRightLabel(Me)
     End Sub

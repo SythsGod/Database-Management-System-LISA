@@ -32,12 +32,14 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.LISA.Main
+            Me.MainForm = Global.LISA.Globals.GetMainForm()
         End Sub
         
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()> _
         Protected Overrides Sub OnCreateSplashScreen()
-            Me.SplashScreen = Global.LISA.SplashLoading
+            If Global.LISA.Globals.GetMainForm Is Global.LISA.Main Then
+                Me.SplashScreen = Global.LISA.SplashLoading
+            End If
         End Sub
     End Class
 End Namespace

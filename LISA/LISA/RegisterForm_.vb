@@ -1,49 +1,40 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Module RegisterForm
-    Public Sub Init()
-        Dim frm As GenericForm = registerForm_
-        Dim button1 As New GenericButton
+Public Class RegisterForm_
+    Inherits GenericForm
+    Public Sub New()
+        MyBase.New("GenericForm_Register", True)
+        InitializeComponent()
 
-        AddUploadButton(frm)
-        AddClearButton(frm)
-        AddTextBoxes(frm)
+        AddUploadButton()
+        AddClearButton()
+        AddTextBoxes()
 
-        RemoveHandler frm.Controls("GenericControlboxButton0").Click, AddressOf FormDesignAndControl.ControlMouseClick
-        AddHandler frm.Controls("GenericControlboxButton0").Click, AddressOf OverriddenControlMouseClick
-        frm.hasBeenCreated = True
-        AddHandler frm.FormClosed, AddressOf frm_FormClosed
 
-        frm.Show()
     End Sub
-
-    Private Sub frm_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs)
-        Environment.Exit(0)
-    End Sub
-
-    Private Sub AddUploadButton(ByVal frm As GenericForm)
+    Private Sub AddUploadButton()
         Dim btn As New GenericButton()
-        btn.Location = New Point(frm.Width - 120, frm.Height - 70)
+        btn.Location = New Point(Me.Width - 120, Me.Height - 70)
         btn.Name = "GenericButton_Upload"
         btn.Size = New Size(100, 50)
         btn.Text = "Submit"
 
         AddHandler btn.Click, AddressOf GenericButtonUpload_Click
-        frm.Controls.Add(btn)
+        Me.Controls.Add(btn)
     End Sub
 
-    Private Sub AddClearButton(ByVal frm As GenericForm)
+    Private Sub AddClearButton()
         Dim btn As New GenericButton()
-        btn.Location = New Point(frm.Width - 240, frm.Height - 70)
+        btn.Location = New Point(Me.Width - 240, Me.Height - 70)
         btn.Name = "GenericButton_Clear"
         btn.Size = New Size(100, 50)
         btn.Text = "Clear"
 
         AddHandler btn.Click, AddressOf GenericButtonClear_Click
-        frm.Controls.Add(btn)
+        Me.Controls.Add(btn)
     End Sub
 
-    Private Sub AddTextBoxes(ByVal frm As GenericForm)
+    Private Sub AddTextBoxes()
         For j = 0 To 6
             For i = 0 To 2
                 Dim lcation As Point = New Point(90 + 400 * i, 70 + 75 * j)
@@ -51,18 +42,18 @@ Module RegisterForm
 
                 If needsDropDown(c) Then 'Create a new combobox
                     Dim cmb As New GenericCombobox("GenericCombobox" & c, lcation, c)
-                    frm.Controls.Add(cmb)
+                    Me.Controls.Add(cmb)
                 Else 'Create a new textbox
                     Dim txt As New GenericTextbox("GenericTextbox" & c, lcation)
-                    frm.Controls.Add(txt)
+                    Me.Controls.Add(txt)
                 End If
 
                 Dim lbl As New Label With {.Location = New Point(lcation.X, lcation.Y - 28), .TextAlign = ContentAlignment.BottomLeft, .Text = registerEntries(c) & ":", .Width = 300}
-                frm.Controls.Add(lbl)
+                Me.Controls.Add(lbl)
             Next
         Next
 
-        For Each ctrl In frm.Controls.OfType(Of GenericCombobox)()
+        For Each ctrl In Me.Controls.OfType(Of GenericCombobox)()
             Select Case ctrl.Tag.ToString
                 Case "2"
                     ctrl.Items.AddRange(New String() {"M", "V"})
@@ -105,10 +96,10 @@ Module RegisterForm
             End Select
         Next
 
-        frm.Controls("GenericTextbox12").Font = New Font(frm.Font.FontFamily, 12) 'Make the 'Email' textbox have a smaller font, so larger emails fit
-        AddHandler frm.Controls("GenericTextbox20").KeyPress, AddressOf NumbersOnly_Keypress
-        AddHandler frm.Controls("GenericTextbox4").KeyPress, AddressOf NumbersOnly_Keypress
-        AddHandler frm.Controls("GenericTextbox3").KeyPress, AddressOf NumbersOnly_Keypress
+        Me.Controls("GenericTextbox12").Font = New Font(Me.Font.FontFamily, 12) 'Make the 'Email' textbox have a smaller font, so larger emails fit
+        AddHandler Me.Controls("GenericTextbox20").KeyPress, AddressOf NumbersOnly_Keypress
+        AddHandler Me.Controls("GenericTextbox4").KeyPress, AddressOf NumbersOnly_Keypress
+        AddHandler Me.Controls("GenericTextbox3").KeyPress, AddressOf NumbersOnly_Keypress
     End Sub
 
     Private Sub OverriddenControlMouseClick(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -258,4 +249,4 @@ Module RegisterForm
 
         Return year & "-" & month & "-" & day
     End Function
-End Module
+End Class

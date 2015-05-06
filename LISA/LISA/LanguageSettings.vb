@@ -14,12 +14,18 @@
         AddHandler frm.MouseMove, AddressOf MoveForms.MouseMove
         AddHandler frm.MouseDown, AddressOf MoveForms.MouseDown
         AddHandler frm.FormClosing, AddressOf MoveForms.Closing
+        AddHandler frm.LostFocus, AddressOf Frm_LostFocus
         AddHandler frm.Paint, AddressOf GenericForm_Paint
         frm.Show()
     End Sub
 
     Private Sub GenericForm_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
         DirectCast(sender, GenericForm).CreateGraphics.DrawRectangle(New Pen(Color.Black), New Rectangle(New Point(0, 0), New Size(DirectCast(sender, GenericForm).Clientrectangle.Width - 1, DirectCast(sender, GenericForm).Clientrectangle.Height - 1)))
+    End Sub
+
+    Private Sub Frm_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+        'Acts like ShowDialog()
+        DirectCast(sender, GenericForm).Focus()
     End Sub
 
     Private Sub CreateFormButtons(ByVal frm As Form)

@@ -11,7 +11,7 @@ Module Globals
     Public langButtons() As String = {""}
     Public registerEntries() As String = {"Voornaam", "Naam", "Geslacht", "Geboortedatum", "Geboorteplaats", "Nationaliteit", "Straatnaam", "Nummer", "Busnummer", "Postcode", "Rijksregister Nummer", "Telefoon/Mobiel", "Email", "Moedertaal", "Spreektaal", "Klas", "Broes/Zussen", "Opmerkingen verblijfsAd", "Godskeuze", "Opmerkingen tucht", "Studietoelage"}
     Public needsDropDown() As Boolean = {False, False, True, False, False, True, False, False, False, False, False, False, False, True, True, True, True, False, True, False, False}
-    Public registerForm_ As New GenericForm("GenericForm_Register", True)
+    'Public registerForm_ As New GenericForm("GenericForm_Register", True)
 
     Public Sub GetServerVars()
         'Change this. I HATE IT.
@@ -64,8 +64,30 @@ Module Globals
         Public OudRondtrekBevol As Integer '?
         Public kerCirBinschip As Integer '?
     End Structure
-End Module
 
+    Public Function GetMainForm() As Form
+        Dim sett As String = GetSetting(My.Application.Info.ProductName, "General", "Usage")
+        Dim ret As Form
+
+        If sett = Nothing Then
+            'Setting doesn't exist
+            ret = Global.LISA.FirstStart
+        Else
+            'Setting exists
+            Select Case sett
+                Case "RegisterOnly"
+                    ret = Global.LISA.RegisterForm_
+                Case "Complete"
+                    ret = Global.LISA.Main
+                Case Else
+                    MsgBox("Error: Couldn't fetch Usage Setting!" & vbNewLine & "Contact administrator.", MsgBoxStyle.Critical)
+                    Environment.Exit(0)
+            End Select
+        End If
+
+        Return ret
+    End Function
+End Module
 'Tags:
 '0 + i = buttons on main (<10)
 '1 + i = Controlbox Buttons (<20)
