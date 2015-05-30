@@ -2,28 +2,29 @@
 Imports MySql.Data.MySqlClient
 
 Module DatabaseRetrieval
-    Public Sub OpenConnection()
-        myConn.Close()
-        myConn.ConnectionString = "server=" & ServerVars(0) & ";User id=" & ServerVars(1) & ";password=" & ServerVars(2) & ";database=" & ServerVars(3) & ";Allow Zero Datetime=True"
-        'myConn.ConnectionString = "Server=" & ServerVars(0) & ";Database=" & ServerVars(3) & ";Uid=" & ServerVars(1) & ";Pwd=" & ServerVars(2)
+    Private myConn As New MySqlConnection
 
+    Public ReadOnly Property getConn() As MySqlConnection
+        Get
+            Return myConn
+        End Get
+    End Property
+    Public Sub SetConnectionString()
+        myConn.ConnectionString = "server=" & DB_IP & ";User id=" & DB_Username & ";password=" & DB_Password & ";database=" & DB_Database & ";Allow Zero Datetime=True"
+    End Sub
+    Public Sub OpenConnection()
+        myConn.Close() 'Close any (possible) open connection
 
         Try
-            myConn.Open()
+            myConn.Open() 'Try to open a valid connection to the database, throw an error otherwise
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & vbNewLine & "Show this message to your computer wizard! He'll use some magic to fix this!") 'Show the user the error
         End Try
     End Sub
 
     Public Function RetrieveTableNames(ByVal table As String) As DataSet
         Dim TEMP_DataSet As New DataSet(table)
-        Dim sqlStr As String = ""
-
-        If table = "" Then
-            sqlStr = "SELECT * FROM " & table
-        Else
-            sqlStr = "SELECT * FROM " & table
-        End If
+        Dim sqlStr As String = "SELECT * FROM " & table
 
         OpenConnection()
 
@@ -33,7 +34,7 @@ Module DatabaseRetrieval
             adp.FillSchema(TEMP_DataSet, SchemaType.Source, table) 'Add primary key to dataset
             adp.Fill(TEMP_DataSet, table)
         Catch ex As MySqlException
-            MsgBox("Error: " & ex.Message)
+            MsgBox("Error: " & ex.Message & vbNewLine & "Contact your computer wizard! Let him use his magical powers for once!")
             Stop
         End Try
 
@@ -41,6 +42,7 @@ Module DatabaseRetrieval
 
         Return TEMP_DataSet
 
+        'Dispose of variables no longer used
         TEMP_DataSet.Dispose()
         myConn.Close()
     End Function
@@ -59,6 +61,7 @@ Module DatabaseRetrieval
             MsgBox(ex.Message)
         End Try
 
+        'Dispose of variables no longer used
         dataAdapter.Dispose()
         objCommandBuilder.Dispose()
     End Function

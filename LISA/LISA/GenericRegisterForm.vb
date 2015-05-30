@@ -1,6 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Public Class RegisterForm_
+Public Class GenericRegisterForm
     Inherits GenericForm
     Public Sub New()
         MyBase.New("GenericForm_Register", True)
@@ -9,8 +9,6 @@ Public Class RegisterForm_
         AddUploadButton()
         AddClearButton()
         AddTextBoxes()
-
-
     End Sub
     Private Sub AddUploadButton()
         Dim btn As New GenericButton()
@@ -40,15 +38,16 @@ Public Class RegisterForm_
                 Dim lcation As Point = New Point(90 + 400 * i, 70 + 75 * j)
                 Dim c As Integer = i + (j * 3) 'Stores where the counter is at
 
-                If needsDropDown(c) Then 'Create a new combobox
+                If registerTranslations.Rows(c)(10).ToString = "1" Then 'Create a new combobox
                     Dim cmb As New GenericCombobox("GenericCombobox" & c, lcation, c)
                     Me.Controls.Add(cmb)
                 Else 'Create a new textbox
                     Dim txt As New GenericTextbox("GenericTextbox" & c, lcation)
+                    AddHandler txt.LostFocus, AddressOf ValidateTextbox
                     Me.Controls.Add(txt)
                 End If
 
-                Dim lbl As New Label With {.Location = New Point(lcation.X, lcation.Y - 28), .TextAlign = ContentAlignment.BottomLeft, .Text = registerEntries(c) & ":", .Width = 300}
+                Dim lbl As New Label With {.Location = New Point(lcation.X, lcation.Y - 28), .TextAlign = ContentAlignment.BottomLeft, .Text = registerTranslations.Rows(c)(language).ToString & ":", .Width = 300}
                 Me.Controls.Add(lbl)
             Next
         Next
@@ -59,34 +58,34 @@ Public Class RegisterForm_
                     ctrl.Items.AddRange(New String() {"M", "V"})
                     ctrl.SelectedIndex = 0
                 Case "5"
-                    For i = 0 To AllTableInformation(4).Tables(0).Rows.Count - 1
-                        ctrl.Items.Add(AllTableInformation(4).Tables(0).Rows(i)(2).ToString)
+                    For i = 0 To allInformation(4).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(allInformation(4).Tables(0).Rows(i)(2).ToString)
                     Next
 
                     ctrl.SelectedIndex = 0
                 Case "13"
-                    For i = 0 To AllTableInformation(2).Tables(0).Rows.Count - 1
-                        ctrl.Items.Add(AllTableInformation(2).Tables(0).Rows(i)(1).ToString)
+                    For i = 0 To allInformation(2).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(allInformation(2).Tables(0).Rows(i)(1).ToString)
                     Next
 
                     ctrl.SelectedIndex = 0
                 Case "14"
-                    For i = 0 To AllTableInformation(2).Tables(0).Rows.Count - 1
-                        ctrl.Items.Add(AllTableInformation(2).Tables(0).Rows(i)(1).ToString)
+                    For i = 0 To allInformation(2).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(allInformation(2).Tables(0).Rows(i)(1).ToString)
                     Next
 
                     ctrl.SelectedIndex = 0
                 Case "15"
-                    For i = 0 To AllTableInformation(10).Tables(0).Rows.Count - 1
-                        ctrl.Items.Add(AllTableInformation(10).Tables(0).Rows(i)(2).ToString)
+                    For i = 0 To allInformation(10).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(allInformation(10).Tables(0).Rows(i)(2).ToString)
                     Next
                     ctrl.SelectedIndex = 0
                 Case "16"
                     ctrl.Items.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
                     ctrl.SelectedIndex = 0
                 Case "18"
-                    For i = 0 To AllTableInformation(8).Tables(0).Rows.Count - 1
-                        ctrl.Items.Add(AllTableInformation(8).Tables(0).Rows(i)(1).ToString)
+                    For i = 0 To allInformation(8).Tables(0).Rows.Count - 1
+                        ctrl.Items.Add(allInformation(8).Tables(0).Rows(i)(1).ToString)
                     Next
 
                     ctrl.SelectedIndex = 0
@@ -97,7 +96,7 @@ Public Class RegisterForm_
         Next
 
         Me.Controls("GenericTextbox12").Font = New Font(Me.Font.FontFamily, 12) 'Make the 'Email' textbox have a smaller font, so larger emails fit
-        AddHandler Me.Controls("GenericTextbox20").KeyPress, AddressOf NumbersOnly_Keypress
+        AddHandler Me.Controls("GenericCombobox20").KeyPress, AddressOf NumbersOnly_Keypress
         AddHandler Me.Controls("GenericTextbox4").KeyPress, AddressOf NumbersOnly_Keypress
         AddHandler Me.Controls("GenericTextbox3").KeyPress, AddressOf NumbersOnly_Keypress
     End Sub
@@ -122,10 +121,10 @@ Public Class RegisterForm_
     End Sub
 
     Private Sub GenericButtonUpload_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If Not ValidationTextboxes(CType(DirectCast(sender, GenericButton).FindForm, GenericForm)) Then Exit Sub
+        If Not ValidationTextboxes(CType(DirectCast(sender, GenericButton).FindForm, GenericForm)) Then Exit Sub 'Check all textboxes
 
-        Dim frm As GenericForm = CType(DirectCast(sender, GenericButton).FindForm, GenericForm)
-        Dim lln As New Leerling
+        Dim frm As GenericForm = CType(DirectCast(sender, GenericButton).FindForm, GenericForm) 'Retrieve current form in var
+        Dim lln As New Leerling 'New structure var
 
         lln.Voornaam = frm.Controls("GenericTextbox0").Text
         lln.Naam = frm.Controls("GenericTextbox1").Text
@@ -155,7 +154,7 @@ Public Class RegisterForm_
         lln.InschrijvingsStatus = 0
         lln.InschrDatum = CDate(String.Format("{0:yyyy/MM/dd}", Date.Now))
         lln.InschrUur = Date.Now.TimeOfDay
-        lln.StudieToelage = DirectCast(frm.Controls("GenericTextbox20"), GenericTextbox).ToInteger
+        lln.StudieToelage = DirectCast(frm.Controls("GenericCombobox20"), GenericCombobox).SelectedIndex
         lln.VerBuitGezin = 0
         lln.OudRondtrekBevol = 0
         lln.kerCirBinschip = 0
@@ -196,7 +195,7 @@ Public Class RegisterForm_
 
         Dim sqlString As String = "INSERT INTO lisa_leerling (Voornaam, Naam, Geslacht, Geboortedatum, Geboorteplaats, NationaliteitID, Straatnaam, Nummer, Busnummer, PostcodeID, RijksRegNummer, TelMobiel, Email, MoedertaalID, SpreektaalID, KlasID, BroZus, ZDPersoneel, CorrGerAan, OpmIvmVerblijfsAd, Rapport, Attest, Buitenpas, GodsKeuzeID, OpmIvmTucht, InschrijvingsStatus, inschrdatum, inschruur, StudieToelage, VerBuitGezin, OudRondtrekBevol, KerCirBinschip) VALUES (@value1, @value2, @value3, @value4, @Value5, @Value6, @Value7, @Value8, @Value9, @Value10, @Value11, @Value12, @Value13, @Value14, @Value15, @Value16, @Value17, @Value18, @Value19, @Value20, @Value21, @Value22, @Value23, @Value24, @Value25, @Value26, @Value27, @Value28, @Value29, @Value30, @Value31, @Value32);"
         cmdInsert.CommandText = sqlString
-        cmdInsert.Connection = myConn
+        cmdInsert.Connection = getConn()
 
         Dim iSqlStatus As Integer
         OpenConnection()
@@ -221,6 +220,41 @@ Public Class RegisterForm_
         DirectCast(sender, GenericButton).FindForm.Controls("GenericTextbox0").Focus()
     End Sub
 
+    Private Sub ValidateTextbox(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim txt As GenericTextbox = DirectCast(sender, GenericTextbox) 'Temp var for textbox
+
+        Dim NotRequired As Boolean = txt.Name <> "GenericTextbox8" And txt.Name <> "GenericTextbox17" And txt.Name <> "GenericTextbox19"
+
+        If txt.Text = "" And NotRequired Then
+            DrawErrorBox(txt.FindForm.CreateGraphics, txt, Color.FromArgb(255, 178, 0, 0))
+        ElseIf NotRequired Then
+            If txt.Name = "GenericTextbox3" Then 'Execute date check
+                If DateCheck(txt) Then
+                    DrawErrorBox(txt.FindForm.CreateGraphics, txt, Color.FromArgb(255, 0, 128, 0))
+                Else
+                    DrawErrorBox(txt.FindForm.CreateGraphics, txt, Color.FromArgb(255, 178, 0, 0))
+                End If
+            Else
+                DrawErrorBox(txt.FindForm.CreateGraphics, txt, Color.FromArgb(255, 0, 128, 0))
+            End If
+        End If
+    End Sub
+
+    Private Function DateCheck(ByVal txt As GenericTextbox) As Boolean
+        Dim year As Integer = CInt(txt.Text.Substring(0, 4))
+        Dim month As Integer = CInt(txt.Text.Substring(4, 2))
+        Dim day As Integer = CInt(txt.Text.Substring(6, 2))
+        Dim time As String = year & month & day
+
+        Dim valid As Boolean = year <= 2050 And year >= 1970 And month <= 12 And month >= 1 And day <= 31 And day >= 1
+
+        If month = 4 Or month = 6 Or month = 9 Or month = 11 And day = 31 Then valid = False 'If the month is only 30 long and the day is 31th then you have a problem
+        If month = 2 And day > 29 Then valid = False 'If it's february then there's no 29th, 30th or 31th (unless it's a leap year)
+        If Not Date.IsLeapYear(year) And month = 2 And day = 29 Then valid = False 'If it's not a leap year then february 29th can't be
+
+        Return valid
+    End Function
+
     Private Function ValidationTextboxes(ByVal frm As GenericForm) As Boolean
         Dim allValid As Boolean = True
 
@@ -229,11 +263,22 @@ Public Class RegisterForm_
                 DrawErrorBox(frm.CreateGraphics, txt, Color.FromArgb(255, 178, 0, 0))
                 txt.Tag = "hadErrored"
                 allValid = False
+
+                txt.Focus()
+            ElseIf txt.Name = "GenericTextbox3" Then
+                If DateCheck(txt) Then
+                    DrawErrorBox(frm.CreateGraphics, txt, Color.FromArgb(255, 0, 128, 0))
+                Else
+                    DrawErrorBox(frm.CreateGraphics, txt, Color.FromArgb(255, 178, 0, 0))
+                    allValid = False
+                End If
             ElseIf txt.Tag Is "hadErrored" Then
-                DrawErrorBox(frm.CreateGraphics, txt, frm.BackColor)
+                DrawErrorBox(frm.CreateGraphics, txt, Color.FromArgb(255, 0, 128, 0))
                 txt.Tag = Nothing
             End If
         Next
+
+        frm.Controls("GenericTextbox0").Focus()
 
         Return allValid
     End Function

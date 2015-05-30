@@ -47,6 +47,22 @@ LISA
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
+</member><member name="P:LISA.My.Resources.Resources.DB_Database">
+	<summary>
+  Looks up a localized string similar to gip6ib_lisa.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.DB_IP">
+	<summary>
+  Looks up a localized string similar to 185.13.227.5.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.DB_Password">
+	<summary>
+  Looks up a localized string similar to gip6ib_lisa2014.
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.DB_Username">
+	<summary>
+  Looks up a localized string similar to gip6ib.
+</summary>
 </member><member name="P:LISA.My.Resources.Resources.Language_Settings_Icon__Active_">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -74,22 +90,6 @@ LISA
 </member><member name="P:LISA.My.Resources.Resources.Sansation_Regular">
 	<summary>
   Looks up a localized resource of type System.Byte[].
-</summary>
-</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_0">
-	<summary>
-  Looks up a localized string similar to 185.13.227.5.
-</summary>
-</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_1">
-	<summary>
-  Looks up a localized string similar to gip6ib.
-</summary>
-</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_2">
-	<summary>
-  Looks up a localized string similar to gip6ib_lisa2014.
-</summary>
-</member><member name="P:LISA.My.Resources.Resources.SERVER_VAR_3">
-	<summary>
-  Looks up a localized string similar to gip6ib_lisa.
 </summary>
 </member><member name="T:LISA.My.Resources.Resources">
 	<summary>

@@ -58,18 +58,18 @@
         lbl.Width = 350
         lbl.Location = New Point(CInt(frm.ClientRectangle.Width / 2 - lbl.Width / 2), frm.ClientRectangle.Height - 55 + lbl.Height)
         lbl.Name = "GenericLabel_CurrentLang"
-        lbl.Text = "Current Language: " & languages(currentLang - 2)
+        lbl.Text = "Current Language: " & languages(language - 2)
         lbl.TextAlign = ContentAlignment.MiddleCenter
         frm.Controls.Add(lbl)
     End Sub
 
     Private Sub ButtonForm_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        currentLang = CInt(DirectCast(sender, GenericButton).Tag) + 2
-        SaveSetting(My.Application.Info.ProductName, "General", "Language Setting", currentLang.ToString)
+        language = CInt(DirectCast(sender, GenericButton).Tag) + 2
+        SaveSetting(My.Application.Info.ProductName, "General", "Language Setting", language.ToString)
 
         For Each btn As GenericButton In Main.Controls.OfType(Of GenericButton)()
             If CInt(btn.Tag) < 10 Then
-                btn.Text = TableNamesInDatabase(CInt(btn.Tag))(currentLang).ToString
+                btn.Text = neededTables(CInt(btn.Tag))(language).ToString
             End If
         Next
 

@@ -5,7 +5,7 @@ Module DynamicSubFormCreation
     Private changesWereMade As Boolean
 
     Public Sub Init(ByVal buttonTag As Integer, ByVal name As String)
-        data = AllTableInformation(buttonTag)
+        data = allInformation(buttonTag)
 
         Dim frm As New GenericForm("GenericForm_" & buttonTag.ToString, True)
         frm.Tag = buttonTag
@@ -131,7 +131,7 @@ Module DynamicSubFormCreation
         End If
 
         'Upload stuff
-        Dim table As String = TableNamesInDatabase(CInt(DirectCast(sender, GenericButton).FindForm.Tag))(1).ToString
+        Dim table As String = neededTables(CInt(DirectCast(sender, GenericButton).FindForm.Tag))(1).ToString
         If Upload(data, table) Then
             label1.SetText("Uploaded to database.", 3)
         Else

@@ -146,3 +146,16 @@ I:\Git\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.Resources.resour
 I:\Git\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
 I:\Git\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.FirstStart.resources
 I:\Git\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe.config
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.exe
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.xml
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.pdb
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.Resources.resources
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.FirstStart.resources
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbprojResolveAssemblyReference.cache
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.pdb
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.xml
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\MySql.Data.dll

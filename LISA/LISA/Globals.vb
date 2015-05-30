@@ -2,28 +2,39 @@
 Imports MySql.Data.MySqlClient
 
 Module Globals
-    Public ServerVars(3) As String
-    Public TableNamesInDatabase As New DataTable
-    Public AllTableInformation As New Dictionary(Of Integer, DataSet)
-    Public myConn As New MySqlConnection
-    Public currentLang As Integer = 2 '= Dutch
-    Public languages() As String = {"Nederlands", "English", "Français", "Español", "Deutsch", "中国", "", ""}
-    Public langButtons() As String = {""}
-    Public registerEntries() As String = {"Voornaam", "Naam", "Geslacht", "Geboortedatum", "Geboorteplaats", "Nationaliteit", "Straatnaam", "Nummer", "Busnummer", "Postcode", "Rijksregister Nummer", "Telefoon/Mobiel", "Email", "Moedertaal", "Spreektaal", "Klas", "Broes/Zussen", "Opmerkingen verblijfsAd", "Godskeuze", "Opmerkingen tucht", "Studietoelage"}
-    Public needsDropDown() As Boolean = {False, False, True, False, False, True, False, False, False, False, False, False, False, True, True, True, True, False, True, False, False}
-    'Public registerForm_ As New GenericForm("GenericForm_Register", True)
 
-    Public Sub GetServerVars()
-        'Change this. I HATE IT.
-        ServerVars(0) = My.Resources.SERVER_VAR_0
-        ServerVars(1) = My.Resources.SERVER_VAR_1
-        ServerVars(2) = My.Resources.SERVER_VAR_2
-        ServerVars(3) = My.Resources.SERVER_VAR_3
+#Region "Global Variables" 'All globally used variables are declared here
+    'Server Connection Variables
+    Public DB_IP As String
+    Public DB_Username As String
+    Public DB_Password As String
+    Public DB_Database As String
+
+    'All datasets or tables storing information from the database
+    Public neededTables As New DataTable
+    Public allInformation As New Dictionary(Of Integer, DataSet)
+    Public registerTranslations As New DataTable
+
+    'Unnamed (for now)
+    Public language As Integer
+    Public languages() As String = {"Nederlands", "English", "Français", "Español", "Deutsch", "中国", "日本人", "Português"} 'Array of all possible languages which have translation in the database
+#End Region
+
+    Public Sub Init()
+        GetServerVars()
+        GetPreviousLanguage()
+        SetConnectionString()
+    End Sub
+    Private Sub GetServerVars()
+        DB_IP = My.Resources.DB_IP
+        DB_Username = My.Resources.DB_Username
+        DB_Password = My.Resources.DB_Password
+        DB_Database = My.Resources.DB_Database
     End Sub
 
-    Public Sub GetPreviousLanguage()
+    Private Sub GetPreviousLanguage()
         If GetSetting(My.Application.Info.ProductName, "General", "Language Setting") <> Nothing Then
-            currentLang = CInt(GetSetting(My.Application.Info.ProductName, "General", "Language Setting"))
+            language = CInt(GetSetting(My.Application.Info.ProductName, "General", "Language Setting"))
         Else
             'Create new registry entry if the application runs for the first time (Default language is Dutch)
             SaveSetting(My.Application.Info.ProductName, "General", "Language Setting", "2")
@@ -65,29 +76,27 @@ Module Globals
         Public kerCirBinschip As Integer '?
     End Structure
 
-    Public Function GetMainForm() As Form
-        Dim sett As String = GetSetting(My.Application.Info.ProductName, "General", "Usage")
-        Dim ret As Form
+    Public Function GetMainForm() As Form 'Trick vb so I can pick the startup form dynamically (hweh)
+        Dim usageSetting As String = GetSetting(My.Application.Info.ProductName, "General", "Usage") 'Get the preset usage setting
+        Dim start As Form = Global.LISA.FirstStart
 
-        If sett = Nothing Then
-            'Setting doesn't exist
-            ret = Global.LISA.FirstStart
-        Else
+        If usageSetting <> Nothing Then
             'Setting exists
-            Select Case sett
+            Select Case usageSetting
                 Case "RegisterOnly"
-                    ret = Global.LISA.RegisterForm_
+                    start = Global.LISA.GenericRegisterForm
                 Case "Complete"
-                    ret = Global.LISA.Main
+                    start = Global.LISA.Main
                 Case Else
-                    MsgBox("Error: Couldn't fetch Usage Setting!" & vbNewLine & "Contact administrator.", MsgBoxStyle.Critical)
+                    MsgBox("Error: Couldn't fetch Usage Setting!" & vbNewLine & "Contact computer wizard!.", MsgBoxStyle.Critical)
                     Environment.Exit(0)
             End Select
         End If
 
-        Return ret
+        Return start
     End Function
 End Module
+
 'Tags:
 '0 + i = buttons on main (<10)
 '1 + i = Controlbox Buttons (<20)

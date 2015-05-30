@@ -10,10 +10,10 @@
 
         GenericForm.AddControlBox(Me)
 
-        GetPreviousLanguage()
-        GetServerVars()
+        Globals.Init()
 
-        TableNamesInDatabase = DatabaseRetrieval.RetrieveTableNames("vb_menu").Tables(0)
+        neededTables = DatabaseRetrieval.RetrieveTableNames("vb_menu").Tables(0)
+        registerTranslations = DatabaseRetrieval.RetrieveTableNames("vb_registerform_entries").Tables(0)
 
         AddButtons(Me)
         AddLanguageButton(Me)
@@ -27,12 +27,12 @@
     End Sub
 
     Private Sub Main_Load(ByVal sender As Object, ByVal e As System.EventArgs)
-        SplashLoading.BarLong(TableNamesInDatabase.Rows.Count * 10)
+        SplashLoading.BarLong(neededTables.Rows.Count * 10)
 
         Dim i As Integer
-        While i <= TableNamesInDatabase.Rows.Count - 1
-            AllTableInformation(i) = New DataSet
-            AllTableInformation(i) = DatabaseRetrieval.RetrieveTableNames(TableNamesInDatabase.Rows(i)(1).ToString)
+        While i <= neededTables.Rows.Count - 1
+            allInformation(i) = New DataSet
+            allInformation(i) = DatabaseRetrieval.RetrieveTableNames(neededTables.Rows(i)(1).ToString)
             SplashLoading.ShowBar((i + 1) * 10)
             i += 1
             Threading.Thread.Sleep(100)
@@ -43,13 +43,13 @@
         Dim f As Integer = 0
         Dim g As Integer = 0
 
-        For i = 0 To TableNamesInDatabase.Rows.Count - 2
+        For i = 0 To neededTables.Rows.Count - 2
             Dim btn As New GenericButton
 
             btn.Location = New Point(180 + 500 * f, 132 + ((75 + 20) * (i - g)))
             btn.Name = "GenericButton_" & i
             btn.Tag = i
-            btn.Text = TableNamesInDatabase.Rows(i)(currentLang).ToString
+            btn.Text = neededTables.Rows(i)(language).ToString
 
             AddHandler btn.Click, AddressOf GenericButtonForm_Click
             frm.Controls.Add(btn)
@@ -98,7 +98,7 @@
     Private Sub GenericButtonForm_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Me.Hide()
 
-        DynamicSubFormCreation.Init(CInt(DirectCast(sender, GenericButton).Tag), TableNamesInDatabase(CInt(DirectCast(sender, GenericButton).Tag))(currentLang).ToString)
+        DynamicSubFormCreation.Init(CInt(DirectCast(sender, GenericButton).Tag), neededTables(CInt(DirectCast(sender, GenericButton).Tag))(language).ToString)
     End Sub
 
     Private Sub GenericButtonLanguage_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -107,8 +107,8 @@
 
     Private Sub GenericButtonRegister_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         DirectCast(sender, ControlBoxButton).FindForm.Hide()
-        If registerForm_.hasBeenCreated Then registerForm_.Show()
-        If Not registerForm_.hasBeenCreated Then RegisterForm.Init()
+
+        RegisterForm.Init()
     End Sub
 
     Private Sub AddCopyRightLabel(ByVal frm As Form)

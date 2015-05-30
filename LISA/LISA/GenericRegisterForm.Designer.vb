@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class RegisterForm_
+Partial Class GenericRegisterForm
     Inherits LISA.GenericForm
 
     'Form overrides dispose to clean up the component list.

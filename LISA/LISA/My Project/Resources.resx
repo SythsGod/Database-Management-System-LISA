@@ -121,19 +121,19 @@
   <data name="Sansation_Regular" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sansation_Regular.ttf;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SERVER_VAR_0" xml:space="preserve">
+  <data name="DB_IP" xml:space="preserve">
     <value>185.13.227.5</value>
     <comment>Server IP</comment>
   </data>
-  <data name="SERVER_VAR_1" xml:space="preserve">
+  <data name="DB_Username" xml:space="preserve">
     <value>gip6ib</value>
     <comment>User ID</comment>
   </data>
-  <data name="SERVER_VAR_2" xml:space="preserve">
+  <data name="DB_Password" xml:space="preserve">
     <value>gip6ib_lisa2014</value>
     <comment>Password</comment>
   </data>
-  <data name="SERVER_VAR_3" xml:space="preserve">
+  <data name="DB_Database" xml:space="preserve">
     <value>gip6ib_lisa</value>
     <comment>Needed Database Name</comment>
   </data>

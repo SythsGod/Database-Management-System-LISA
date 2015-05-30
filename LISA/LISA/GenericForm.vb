@@ -1,7 +1,6 @@
 ﻿Public Class GenericForm
     Inherits Form
 
-    Private mHasBeenCreated As Boolean
     Private mHasControlbox As Boolean
 
     Private m_backcolor As Color
@@ -11,7 +10,6 @@
 
     Sub Init()
         Me.BackColor = Color.White
-        Me.mHasBeenCreated = False
         Me.Name = ""
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         Me.Size = New Size(1280, 720)
@@ -37,15 +35,6 @@
             Me.mHasControlbox = False
         End If
     End Sub
-
-    Public Property hasBeenCreated() As Boolean
-        Get
-            Return mHasBeenCreated
-        End Get
-        Set(value As Boolean)
-            mHasBeenCreated = value
-        End Set
-    End Property
 
     Public Shared Sub AddControlBox(ByVal frm As Form)
         For i = 0 To 2
