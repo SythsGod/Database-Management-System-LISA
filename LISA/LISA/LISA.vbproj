@@ -66,6 +66,9 @@
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Lisa Temp Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -99,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="AppUse.vb" />
     <Compile Include="ControlBoxButton.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -111,6 +113,21 @@
     </Compile>
     <Compile Include="FormDesignAndControl.vb" />
     <Compile Include="GenericCombobox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GenericControlboxButtonClose.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GenericControlboxButtonLanguage.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GenericControlboxButtonMaximize.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GenericControlboxButtonMinimize.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GenericControlboxButtonRegister.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GenericForm.vb">
@@ -125,7 +142,6 @@
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegisterForm.vb" />
     <Compile Include="Globals.vb" />
     <Compile Include="LanguageSettings.vb" />
     <Compile Include="MoveForms.vb" />
@@ -317,6 +333,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Register Form Icon %28Inactive%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lisa Temp Icon.ico" />
+    <None Include="Resources\Lisa Temp Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

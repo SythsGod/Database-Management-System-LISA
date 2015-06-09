@@ -4,6 +4,9 @@ Imports MySql.Data.MySqlClient
 Module Globals
 
 #Region "Global Variables" 'All globally used variables are declared here
+    'App ID (Complete or Registration only)
+    Public AppID As Integer
+
     'Server Connection Variables
     Public DB_IP As String
     Public DB_Username As String
@@ -15,6 +18,13 @@ Module Globals
     Public allInformation As New Dictionary(Of Integer, DataSet)
     Public registerTranslations As New DataTable
 
+    'Button images
+    Public imgClose() As Bitmap = {My.Resources.ButtonClose, My.Resources.ButtonCloseHover}
+    Public imgMinimize() As Bitmap = {My.Resources.ButtonMinimize, My.Resources.ButtonMinimizeHover}
+    Public imgMaximize() As Bitmap = {My.Resources.ButtonMaximize, My.Resources.ButtonMaximizeHover, My.Resources.ButtonMaximized, My.Resources.ButtonMaximizedHover}
+    Public imgLangSetting() As Bitmap = {My.Resources.LangSetting, My.Resources.LangSettingHover}
+    Public imgRegisterForm() As Bitmap = {My.Resources.RegisterForm, My.Resources.RegisterFormHover}
+
     'Unnamed (for now)
     Public language As Integer
     Public languages() As String = {"Nederlands", "English", "Français", "Español", "Deutsch", "中国", "日本人", "Português"} 'Array of all possible languages which have translation in the database
@@ -22,8 +32,17 @@ Module Globals
 
     Public Sub Init()
         GetServerVars()
-        GetPreviousLanguage()
         SetConnectionString()
+        GetNeededTables()
+        GetPreviousLanguage()
+    End Sub
+
+    Public Sub GetTranslations()
+        registerTranslations = DatabaseRetrieval.RetrieveTableNames("vb_registerform_entries").Tables(0)
+    End Sub
+
+    Public Sub GetNeededTables()
+        neededTables = DatabaseRetrieval.RetrieveTableNames("vb_menu").Tables(0)
     End Sub
     Private Sub GetServerVars()
         DB_IP = My.Resources.DB_IP
@@ -32,6 +51,23 @@ Module Globals
         DB_Database = My.Resources.DB_Database
     End Sub
 
+    Public Sub GetDataFromServer()
+        Globals.GetNeededTables()
+        SplashLoading.BarLong(neededTables.Rows.Count * 10 + 20)
+        SplashLoading.ShowBar((10))
+
+        Dim i As Integer
+        While i <= neededTables.Rows.Count - 1
+            allInformation(i) = New DataSet
+            allInformation(i) = DatabaseRetrieval.RetrieveTableNames(neededTables.Rows(i)(1).ToString)
+            SplashLoading.ShowBar((i + 1) * 10)
+            i += 1
+            Threading.Thread.Sleep(100)
+        End While
+
+        Globals.GetTranslations()
+        SplashLoading.ShowBar((i + 2) * 10)
+    End Sub
     Private Sub GetPreviousLanguage()
         If GetSetting(My.Application.Info.ProductName, "General", "Language Setting") <> Nothing Then
             language = CInt(GetSetting(My.Application.Info.ProductName, "General", "Language Setting"))
@@ -69,7 +105,7 @@ Module Globals
         Public OpmIvmTucht As String
         Public InschrijvingsStatus As Integer 'Boolean wise?
         Public InschrDatum As Date
-        Public InschrUur As TimeSpan
+        Public InschrUur As String
         Public StudieToelage As Integer 'Boolean wise?
         Public VerBuitGezin As Integer '?
         Public OudRondtrekBevol As Integer '?
@@ -85,8 +121,10 @@ Module Globals
             Select Case usageSetting
                 Case "RegisterOnly"
                     start = Global.LISA.GenericRegisterForm
+                    AppID = 1
                 Case "Complete"
                     start = Global.LISA.Main
+                    AppID = 2
                 Case Else
                     MsgBox("Error: Couldn't fetch Usage Setting!" & vbNewLine & "Contact computer wizard!.", MsgBoxStyle.Critical)
                     Environment.Exit(0)
@@ -97,15 +135,5 @@ Module Globals
     End Function
 End Module
 
-'Tags:
-'0 + i = buttons on main (<10)
-'1 + i = Controlbox Buttons (<20)
-'   10 = Close
-'   11 = Maximize
-'   12 = Minimize
-'   13 = Maximize To Minimize
-'   14 = Language Picker
-'   15 = Register Form
-'
 'Colors:
 '   Blue Form Buttons: Hex - #3998d6 | Argb - 57,152,214

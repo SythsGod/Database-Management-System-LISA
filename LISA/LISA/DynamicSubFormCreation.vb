@@ -50,17 +50,6 @@ Module DynamicSubFormCreation
         AddHandler dataGridView1.CellValueChanged, AddressOf dataGridView1_CellValueChanged
         frm.Controls.Add(dataGridView1)
 
-        'Add textboxes and buttons to handle the inserting of new records
-        'For i = 0 To AllTableInformation(buttonTag).Tables(0).Columns.Count - 1
-        '    Dim textbox1 As New TextBox
-        '    With textbox1
-        '        .Name = "txtInput" & i
-        '        .Location = New Point(form1.ClientRectangle.Width - textbox1.Width - 20, 100 * (i + 1))
-        '    End With
-        '    form1.Controls.Add(textbox1)
-        'Next 
-
-        'AddHandler form1.Paint, AddressOf form1_Paint
         AddHandler frm.FormClosing, AddressOf frm_FormClosing
         AddHandler frm.Resize, AddressOf frm_Resize
         AddHandler frm.MouseUp, AddressOf MoveForms.MouseUp
@@ -70,10 +59,10 @@ Module DynamicSubFormCreation
     End Sub
 
     'Temporary measure for black border around form (For visibility with white background)
-    'Private Sub form1_Paint(ByVal sender As Object, ByVal e As PaintEventArgs)
-    '    Dim pen As Pen = New Pen(Color.Black)
-    '    e.Graphics.DrawRectangle(pen, New Rectangle(0, 0, DirectCast(sender, Form).Width - 1, DirectCast(sender, Form).Height - 1))
-    'End Sub
+    Private Sub form1_Paint(ByVal sender As Object, ByVal e As PaintEventArgs)
+        Dim pen As Pen = New Pen(Color.Black)
+        e.Graphics.DrawRectangle(pen, New Rectangle(0, 0, DirectCast(sender, Form).Width - 1, DirectCast(sender, Form).Height - 1))
+    End Sub
 
     Private Sub frm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs)
         Main.show()
@@ -92,16 +81,6 @@ Module DynamicSubFormCreation
             lbl.Location = New Point(20, My.Computer.Screen.WorkingArea.Height - lbl.Height + 10)
         End If
     End Sub
-
-    'Unused (Remove later)
-    'Private Sub ButtonPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs)
-    '    Dim currForm As Form = DirectCast(sender, Button).FindForm
-    '    'Remove the 'black given border' on a flat button by painting over it using the same background color as the button itself
-    '    Dim button1 = DirectCast(sender, Button)
-    '    Using P As New Pen(currForm.BackColor)
-    '        e.Graphics.DrawRectangle(P, 1, 1, button1.Width - 3, button1.Height - 3)
-    '    End Using
-    'End Sub
 
     Private Sub dataGridView1_DataBindingComplete(ByVal sender As Object, ByVal e As System.EventArgs)
         If DirectCast(sender, DataGridView).Columns.Count > 0 Then
@@ -127,15 +106,14 @@ Module DynamicSubFormCreation
 
         If Not changesWereMade Then
             label1.SetText("No changes detected. Upload canceled.", 3)
-            Exit Sub
-        End If
-
-        'Upload stuff
-        Dim table As String = neededTables(CInt(DirectCast(sender, GenericButton).FindForm.Tag))(1).ToString
-        If Upload(data, table) Then
-            label1.SetText("Uploaded to database.", 3)
         Else
-            label1.SetText("Upload failed.", 5)
+            'Upload stuff
+            Dim table As String = neededTables(CInt(DirectCast(sender, GenericButton).FindForm.Tag))(1).ToString
+            If Upload(data, table) Then
+                label1.SetText("Uploaded to database.", 3)
+            Else
+                label1.SetText("Upload failed.", 5)
+            End If
         End If
     End Sub
 End Module

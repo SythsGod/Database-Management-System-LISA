@@ -6,30 +6,24 @@ Public Class GenericRegisterForm
         MyBase.New("GenericForm_Register", True)
         InitializeComponent()
 
-        AddUploadButton()
-        AddClearButton()
-        AddTextBoxes()
-    End Sub
-    Private Sub AddUploadButton()
-        Dim btn As New GenericButton()
-        btn.Location = New Point(Me.Width - 120, Me.Height - 70)
-        btn.Name = "GenericButton_Upload"
-        btn.Size = New Size(100, 50)
-        btn.Text = "Submit"
+        Me.Icon = My.Resources.LisaIconFlatIco
 
-        AddHandler btn.Click, AddressOf GenericButtonUpload_Click
-        Me.Controls.Add(btn)
+        AddHandler Me.FormClosing, AddressOf frm_FormClosing
     End Sub
 
-    Private Sub AddClearButton()
-        Dim btn As New GenericButton()
-        btn.Location = New Point(Me.Width - 240, Me.Height - 70)
-        btn.Name = "GenericButton_Clear"
-        btn.Size = New Size(100, 50)
-        btn.Text = "Clear"
+    Private Sub AddButtons()
+        Dim btnUpload As New GenericButton() With {.Location = New Point(Me.Width - 120, Me.Height - 70), .Name = "GenericButton_Upload", .Size = New Size(100, 50), .Text = "Submit"}
+        Dim btnClear As New GenericButton() With {.Location = New Point(Me.Width - 240, Me.Height - 70), .Name = "GenericButton_Clear", .Size = New Size(100, 50), .Text = "Clear"}
 
-        AddHandler btn.Click, AddressOf GenericButtonClear_Click
-        Me.Controls.Add(btn)
+        AddHandler btnUpload.Click, AddressOf GenericButtonUpload_Click
+        AddHandler btnClear.Click, AddressOf GenericButtonClear_Click
+        Me.Controls.AddRange(New Control() {btnUpload, btnClear})
+    End Sub
+
+    Private Sub AddLabel()
+        Dim lbl As New ShowAndHideLabel("GenericLabel_Actions")
+        lbl.Location = New Point(90, Me.Height - 30)
+        Me.Controls.Add(lbl)
     End Sub
 
     Private Sub AddTextBoxes()
@@ -99,12 +93,18 @@ Public Class GenericRegisterForm
         AddHandler Me.Controls("GenericCombobox20").KeyPress, AddressOf NumbersOnly_Keypress
         AddHandler Me.Controls("GenericTextbox4").KeyPress, AddressOf NumbersOnly_Keypress
         AddHandler Me.Controls("GenericTextbox3").KeyPress, AddressOf NumbersOnly_Keypress
+
+        'Hacks        
     End Sub
 
     Private Sub OverriddenControlMouseClick(ByVal sender As Object, ByVal e As System.EventArgs)
-        If DirectCast(sender, ControlBoxButton).Tag.ToString = "10" Then
-            DirectCast(sender, ControlBoxButton).FindForm.Hide()
-            Main.Show()
+        DirectCast(sender, ControlBoxButton).clicked(True)
+        Main.Show()
+    End Sub
+
+    Private Sub frm_FormClosing(ByVal sender As Object, ByVal e As Windows.Forms.FormClosingEventArgs)
+        If Globals.AppID = 1 Then
+            Environment.Exit(0)
         End If
     End Sub
 
@@ -121,103 +121,103 @@ Public Class GenericRegisterForm
     End Sub
 
     Private Sub GenericButtonUpload_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If Not ValidationTextboxes(CType(DirectCast(sender, GenericButton).FindForm, GenericForm)) Then Exit Sub 'Check all textboxes
+        If ValidationTextboxes(CType(DirectCast(sender, GenericButton).FindForm, GenericForm)) Then
+            Dim frm As GenericForm = CType(DirectCast(sender, GenericButton).FindForm, GenericForm) 'Retrieve current form in var
+            Dim lln As New Leerling 'New structure var
 
-        Dim frm As GenericForm = CType(DirectCast(sender, GenericButton).FindForm, GenericForm) 'Retrieve current form in var
-        Dim lln As New Leerling 'New structure var
+            lln.Voornaam = frm.Controls("GenericTextbox0").Text
+            lln.Naam = frm.Controls("GenericTextbox1").Text
+            lln.Geslacht = frm.Controls("GenericCombobox2").Text
+            lln.Geboortedatum = ConvertToDate(frm.Controls("GenericTextbox3").Text)
+            lln.Geboorteplaats = DirectCast(frm.Controls("GenericTextbox4"), GenericTextbox).ToInteger
+            lln.NationaliteitId = DirectCast(frm.Controls("GenericCombobox5"), ComboBox).SelectedIndex
+            lln.Straatnaam = frm.Controls("GenericTextbox6").Text
+            lln.HuisNummer = frm.Controls("GenericTextbox7").Text
+            lln.BusNummer = frm.Controls("GenericTextbox8").Text
+            lln.PostcodeId = DirectCast(frm.Controls("GenericTextbox9"), GenericTextbox).ToInteger
+            lln.RijksRegNummer = frm.Controls("GenericTextbox10").Text
+            lln.TelMobiel = frm.Controls("GenericTextbox11").Text
+            lln.Email = frm.Controls("GenericTextbox12").Text
+            lln.MoedertaalId = DirectCast(frm.Controls("GenericCombobox13"), ComboBox).SelectedIndex
+            lln.SpreektaalId = DirectCast(frm.Controls("GenericCombobox14"), ComboBox).SelectedIndex
+            lln.KlasId = DirectCast(frm.Controls("GenericCombobox15"), ComboBox).SelectedIndex
+            lln.BroZus = DirectCast(frm.Controls("GenericCombobox16"), ComboBox).SelectedIndex
+            lln.ZDPersoneel = 0
+            lln.CorrGerAan = 0
+            lln.OpmIvmVerblijfsAd = frm.Controls("GenericTextbox17").Text
+            lln.Rapport = 0
+            lln.Attest = 0
+            lln.Buitenpas = 0
+            lln.GodsKeuzeId = DirectCast(frm.Controls("GenericCombobox18"), ComboBox).SelectedIndex
+            lln.OpmIvmTucht = frm.Controls("GenericTextbox19").Text
+            lln.InschrijvingsStatus = 0
+            lln.InschrDatum = CDate(String.Format("{0:yyyy/MM/dd}", Date.Now))
+            lln.InschrUur = String.Format("{0:yyyy/MM/dd}", Date.Now) & " " & Now.TimeOfDay.ToString
+            lln.StudieToelage = DirectCast(frm.Controls("GenericCombobox20"), GenericCombobox).SelectedIndex
+            lln.VerBuitGezin = 0
+            lln.OudRondtrekBevol = 0
+            lln.kerCirBinschip = 0
 
-        lln.Voornaam = frm.Controls("GenericTextbox0").Text
-        lln.Naam = frm.Controls("GenericTextbox1").Text
-        lln.Geslacht = frm.Controls("GenericCombobox2").Text
-        lln.Geboortedatum = ConvertToDate(frm.Controls("GenericTextbox3").Text)
-        lln.Geboorteplaats = DirectCast(frm.Controls("GenericTextbox4"), GenericTextbox).ToInteger
-        lln.NationaliteitId = DirectCast(frm.Controls("GenericCombobox5"), ComboBox).SelectedIndex
-        lln.Straatnaam = frm.Controls("GenericTextbox6").Text
-        lln.HuisNummer = frm.Controls("GenericTextbox7").Text
-        lln.BusNummer = frm.Controls("GenericTextbox8").Text
-        lln.PostcodeId = DirectCast(frm.Controls("GenericTextbox9"), GenericTextbox).ToInteger
-        lln.RijksRegNummer = frm.Controls("GenericTextbox10").Text
-        lln.TelMobiel = frm.Controls("GenericTextbox11").Text
-        lln.Email = frm.Controls("GenericTextbox12").Text
-        lln.MoedertaalId = DirectCast(frm.Controls("GenericCombobox13"), ComboBox).SelectedIndex
-        lln.SpreektaalId = DirectCast(frm.Controls("GenericCombobox14"), ComboBox).SelectedIndex
-        lln.KlasId = DirectCast(frm.Controls("GenericCombobox15"), ComboBox).SelectedIndex
-        lln.BroZus = DirectCast(frm.Controls("GenericCombobox16"), ComboBox).SelectedIndex
-        lln.ZDPersoneel = 0
-        lln.CorrGerAan = 0
-        lln.OpmIvmVerblijfsAd = frm.Controls("GenericTextbox17").Text
-        lln.Rapport = 0
-        lln.Attest = 0
-        lln.Buitenpas = 0
-        lln.GodsKeuzeId = DirectCast(frm.Controls("GenericCombobox18"), ComboBox).SelectedIndex
-        lln.OpmIvmTucht = frm.Controls("GenericTextbox19").Text
-        lln.InschrijvingsStatus = 0
-        lln.InschrDatum = CDate(String.Format("{0:yyyy/MM/dd}", Date.Now))
-        lln.InschrUur = Date.Now.TimeOfDay
-        lln.StudieToelage = DirectCast(frm.Controls("GenericCombobox20"), GenericCombobox).SelectedIndex
-        lln.VerBuitGezin = 0
-        lln.OudRondtrekBevol = 0
-        lln.kerCirBinschip = 0
+            Dim cmdInsert As New MySqlCommand
+            cmdInsert.Parameters.AddWithValue("@value1", lln.Voornaam)
+            cmdInsert.Parameters.AddWithValue("@value2", lln.Naam)
+            cmdInsert.Parameters.AddWithValue("@value3", lln.Geslacht)
+            cmdInsert.Parameters.AddWithValue("@value4", lln.Geboortedatum)
+            cmdInsert.Parameters.AddWithValue("@value5", lln.Geboorteplaats)
+            cmdInsert.Parameters.AddWithValue("@value6", lln.NationaliteitId)
+            cmdInsert.Parameters.AddWithValue("@value7", lln.Straatnaam)
+            cmdInsert.Parameters.AddWithValue("@value8", lln.HuisNummer)
+            cmdInsert.Parameters.AddWithValue("@value9", lln.BusNummer)
+            cmdInsert.Parameters.AddWithValue("@value10", lln.PostcodeId)
+            cmdInsert.Parameters.AddWithValue("@value11", lln.RijksRegNummer)
+            cmdInsert.Parameters.AddWithValue("@value12", lln.TelMobiel)
+            cmdInsert.Parameters.AddWithValue("@value13", lln.Email)
+            cmdInsert.Parameters.AddWithValue("@value14", lln.MoedertaalId)
+            cmdInsert.Parameters.AddWithValue("@value15", lln.SpreektaalId)
+            cmdInsert.Parameters.AddWithValue("@value16", lln.KlasId)
+            cmdInsert.Parameters.AddWithValue("@value17", lln.BroZus)
+            cmdInsert.Parameters.AddWithValue("@value18", lln.ZDPersoneel)
+            cmdInsert.Parameters.AddWithValue("@value19", lln.CorrGerAan)
+            cmdInsert.Parameters.AddWithValue("@value20", lln.OpmIvmVerblijfsAd)
+            cmdInsert.Parameters.AddWithValue("@value21", lln.Rapport)
+            cmdInsert.Parameters.AddWithValue("@value22", lln.Attest)
+            cmdInsert.Parameters.AddWithValue("@value23", lln.Buitenpas)
+            cmdInsert.Parameters.AddWithValue("@value24", lln.GodsKeuzeId)
+            cmdInsert.Parameters.AddWithValue("@value25", lln.OpmIvmTucht)
+            cmdInsert.Parameters.AddWithValue("@value26", lln.InschrijvingsStatus)
+            cmdInsert.Parameters.AddWithValue("@value27", lln.InschrDatum)
+            cmdInsert.Parameters.AddWithValue("@value28", lln.InschrUur)
+            cmdInsert.Parameters.AddWithValue("@value29", lln.StudieToelage)
+            cmdInsert.Parameters.AddWithValue("@value30", lln.VerBuitGezin)
+            cmdInsert.Parameters.AddWithValue("@value31", lln.OudRondtrekBevol)
+            cmdInsert.Parameters.AddWithValue("@value32", lln.kerCirBinschip)
 
-        Dim cmdInsert As New MySqlCommand
-        cmdInsert.Parameters.AddWithValue("@value1", lln.Voornaam)
-        cmdInsert.Parameters.AddWithValue("@value2", lln.Naam)
-        cmdInsert.Parameters.AddWithValue("@value3", lln.Geslacht)
-        cmdInsert.Parameters.AddWithValue("@value4", lln.Geboortedatum)
-        cmdInsert.Parameters.AddWithValue("@value5", lln.Geboorteplaats)
-        cmdInsert.Parameters.AddWithValue("@value6", lln.NationaliteitId)
-        cmdInsert.Parameters.AddWithValue("@value7", lln.Straatnaam)
-        cmdInsert.Parameters.AddWithValue("@value8", lln.HuisNummer)
-        cmdInsert.Parameters.AddWithValue("@value9", lln.BusNummer)
-        cmdInsert.Parameters.AddWithValue("@value10", lln.PostcodeId)
-        cmdInsert.Parameters.AddWithValue("@value11", lln.RijksRegNummer)
-        cmdInsert.Parameters.AddWithValue("@value12", lln.TelMobiel)
-        cmdInsert.Parameters.AddWithValue("@value13", lln.Email)
-        cmdInsert.Parameters.AddWithValue("@value14", lln.MoedertaalId)
-        cmdInsert.Parameters.AddWithValue("@value15", lln.SpreektaalId)
-        cmdInsert.Parameters.AddWithValue("@value16", lln.KlasId)
-        cmdInsert.Parameters.AddWithValue("@value17", lln.BroZus)
-        cmdInsert.Parameters.AddWithValue("@value18", lln.ZDPersoneel)
-        cmdInsert.Parameters.AddWithValue("@value19", lln.CorrGerAan)
-        cmdInsert.Parameters.AddWithValue("@value20", lln.OpmIvmVerblijfsAd)
-        cmdInsert.Parameters.AddWithValue("@value21", lln.Rapport)
-        cmdInsert.Parameters.AddWithValue("@value22", lln.Attest)
-        cmdInsert.Parameters.AddWithValue("@value23", lln.Buitenpas)
-        cmdInsert.Parameters.AddWithValue("@value24", lln.GodsKeuzeId)
-        cmdInsert.Parameters.AddWithValue("@value25", lln.OpmIvmTucht)
-        cmdInsert.Parameters.AddWithValue("@value26", lln.InschrijvingsStatus)
-        cmdInsert.Parameters.AddWithValue("@value27", lln.InschrDatum)
-        cmdInsert.Parameters.AddWithValue("@value28", lln.InschrUur)
-        cmdInsert.Parameters.AddWithValue("@value29", lln.StudieToelage)
-        cmdInsert.Parameters.AddWithValue("@value30", lln.VerBuitGezin)
-        cmdInsert.Parameters.AddWithValue("@value31", lln.OudRondtrekBevol)
-        cmdInsert.Parameters.AddWithValue("@value32", lln.kerCirBinschip)
+            Dim sqlString As String = "INSERT INTO lisa_leerling (Voornaam, Naam, Geslacht, Geboortedatum, Geboorteplaats, NationaliteitID, Straatnaam, Nummer, Busnummer, PostcodeID, RijksRegNummer, TelMobiel, Email, MoedertaalID, SpreektaalID, KlasID, BroZus, ZDPersoneel, CorrGerAan, OpmIvmVerblijfsAd, Rapport, Attest, Buitenpas, GodsKeuzeID, OpmIvmTucht, InschrijvingsStatus, inschrdatum, inschruur, StudieToelage, VerBuitGezin, OudRondtrekBevol, KerCirBinschip) VALUES (@value1, @value2, @value3, @value4, @Value5, @Value6, @Value7, @Value8, @Value9, @Value10, @Value11, @Value12, @Value13, @Value14, @Value15, @Value16, @Value17, @Value18, @Value19, @Value20, @Value21, @Value22, @Value23, @Value24, @Value25, @Value26, @Value27, @Value28, @Value29, @Value30, @Value31, @Value32);"
+            cmdInsert.CommandText = sqlString
+            cmdInsert.Connection = getConn()
 
-        Dim sqlString As String = "INSERT INTO lisa_leerling (Voornaam, Naam, Geslacht, Geboortedatum, Geboorteplaats, NationaliteitID, Straatnaam, Nummer, Busnummer, PostcodeID, RijksRegNummer, TelMobiel, Email, MoedertaalID, SpreektaalID, KlasID, BroZus, ZDPersoneel, CorrGerAan, OpmIvmVerblijfsAd, Rapport, Attest, Buitenpas, GodsKeuzeID, OpmIvmTucht, InschrijvingsStatus, inschrdatum, inschruur, StudieToelage, VerBuitGezin, OudRondtrekBevol, KerCirBinschip) VALUES (@value1, @value2, @value3, @value4, @Value5, @Value6, @Value7, @Value8, @Value9, @Value10, @Value11, @Value12, @Value13, @Value14, @Value15, @Value16, @Value17, @Value18, @Value19, @Value20, @Value21, @Value22, @Value23, @Value24, @Value25, @Value26, @Value27, @Value28, @Value29, @Value30, @Value31, @Value32);"
-        cmdInsert.CommandText = sqlString
-        cmdInsert.Connection = getConn()
+            Dim iSqlStatus As Integer
+            OpenConnection()
+            iSqlStatus = cmdInsert.ExecuteNonQuery
 
-        Dim iSqlStatus As Integer
-        OpenConnection()
-        iSqlStatus = cmdInsert.ExecuteNonQuery
-
-        If iSqlStatus = 0 Then
-            MsgBox("Error: Upload failed.")
-        Else
-            MsgBox("Successfully submitted the information.")
+            If iSqlStatus = 0 Then
+                CType(DirectCast(sender, GenericButton).FindForm.Controls("GenericLabel_Actions"), ShowAndHideLabel).SetText("Error: Upload failed.", 5)
+            Else
+                CType(DirectCast(sender, GenericButton).FindForm.Controls("GenericLabel_Actions"), ShowAndHideLabel).SetText("Successfully submitted the information.", 3)
+            End If
         End If
     End Sub
 
     Private Sub GenericButtonClear_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        For Each ctrl In DirectCast(sender, GenericButton).FindForm.Controls.OfType(Of GenericTextbox)()
+        Me.Controls("GenericTextbox0").Focus()
+        For Each ctrl In Me.Controls.OfType(Of GenericTextbox)()
             ctrl.Clear()
+            DrawErrorBox(Me.CreateGraphics, ctrl, Me.BackColor)
         Next
-
-        For Each ctrl In DirectCast(sender, GenericButton).FindForm.Controls.OfType(Of GenericCombobox)()
+        For Each ctrl In Me.Controls.OfType(Of GenericCombobox)()
             ctrl.SelectedIndex = 0
         Next
-
-        DirectCast(sender, GenericButton).FindForm.Controls("GenericTextbox0").Focus()
+        Me.Controls("GenericTextbox0").Focus()
     End Sub
 
     Private Sub ValidateTextbox(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -263,12 +263,8 @@ Public Class GenericRegisterForm
                 DrawErrorBox(frm.CreateGraphics, txt, Color.FromArgb(255, 178, 0, 0))
                 txt.Tag = "hadErrored"
                 allValid = False
-
-                txt.Focus()
             ElseIf txt.Name = "GenericTextbox3" Then
-                If DateCheck(txt) Then
-                    DrawErrorBox(frm.CreateGraphics, txt, Color.FromArgb(255, 0, 128, 0))
-                Else
+                If Not DateCheck(txt) Then
                     DrawErrorBox(frm.CreateGraphics, txt, Color.FromArgb(255, 178, 0, 0))
                     allValid = False
                 End If
@@ -294,4 +290,20 @@ Public Class GenericRegisterForm
 
         Return year & "-" & month & "-" & day
     End Function
+
+    Private Sub GenericRegisterForm_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        If AppID = 1 Then
+            Globals.Init()
+            Globals.GetDataFromServer()
+        End If
+
+        AddButtons()
+        AddTextBoxes()
+        AddLabel()
+
+        If AppID <> 1 Then
+            RemoveHandler Me.Controls("GenericControlBoxButtonClose").Click, AddressOf FormDesignAndControl.ControlMouseClick
+            AddHandler Me.Controls("GenericControlBoxButtonClose").Click, AddressOf OverriddenControlMouseClick
+        End If
+    End Sub
 End Class

@@ -10,7 +10,7 @@ Module DatabaseRetrieval
         End Get
     End Property
     Public Sub SetConnectionString()
-        myConn.ConnectionString = "server=" & DB_IP & ";User id=" & DB_Username & ";password=" & DB_Password & ";database=" & DB_Database & ";Allow Zero Datetime=True"
+        myConn.ConnectionString = "server=" & DB_IP & ";User id=" & DB_Username & ";password=" & DB_Password & ";database=" & DB_Database & ";"
     End Sub
     Public Sub OpenConnection()
         myConn.Close() 'Close any (possible) open connection
@@ -34,17 +34,23 @@ Module DatabaseRetrieval
             adp.FillSchema(TEMP_DataSet, SchemaType.Source, table) 'Add primary key to dataset
             adp.Fill(TEMP_DataSet, table)
         Catch ex As MySqlException
-            MsgBox("Error: " & ex.Message & vbNewLine & "Contact your computer wizard! Let him use his magical powers for once!")
-            Stop
+            If ex.ErrorCode.ToString = "-2147467259" Then
+                MsgBox("Timed out. Retrying...")
+                RetrieveTableNames(table)
+            Else
+                MsgBox("error: " & ex.Message & vbNewLine & "contact your computer wizard! let him use his magical powers for once!")
+                MsgBox(ex.ErrorCode.ToString)
+                Stop
+            End If
         End Try
 
         adp.Dispose()
+        myConn.Close()
 
         Return TEMP_DataSet
 
         'Dispose of variables no longer used
         TEMP_DataSet.Dispose()
-        myConn.Close()
     End Function
 
     Public Function Upload(ByVal data As DataSet, ByVal table As String) As Boolean

@@ -1,24 +1,21 @@
 ﻿Public Class Main
     Public Sub New()
-
         InitializeComponent()
         Me.BackColor = Color.White
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        Me.Icon = My.Resources.LisaIconFlatIco
         Me.Name = "Form_Main"
         Me.Size = New Size(1280, 720)
         Me.StartPosition = FormStartPosition.CenterScreen
 
-        GenericForm.AddControlBox(Me)
-
         Globals.Init()
-
-        neededTables = DatabaseRetrieval.RetrieveTableNames("vb_menu").Tables(0)
-        registerTranslations = DatabaseRetrieval.RetrieveTableNames("vb_registerform_entries").Tables(0)
 
         AddButtons(Me)
         AddLanguageButton(Me)
         AddRegisterButton(Me)
         AddCopyRightLabel(Me)
+
+        ControlBoxButton.AddControlbox(Me)
 
         AddHandler Me.MouseUp, AddressOf MoveForms.MouseUp
         AddHandler Me.MouseMove, AddressOf MoveForms.MouseMove
@@ -27,16 +24,7 @@
     End Sub
 
     Private Sub Main_Load(ByVal sender As Object, ByVal e As System.EventArgs)
-        SplashLoading.BarLong(neededTables.Rows.Count * 10)
-
-        Dim i As Integer
-        While i <= neededTables.Rows.Count - 1
-            allInformation(i) = New DataSet
-            allInformation(i) = DatabaseRetrieval.RetrieveTableNames(neededTables.Rows(i)(1).ToString)
-            SplashLoading.ShowBar((i + 1) * 10)
-            i += 1
-            Threading.Thread.Sleep(100)
-        End While
+        Globals.GetDataFromServer()
     End Sub
 
     Private Sub AddButtons(ByVal frm As Form)
@@ -62,14 +50,12 @@
     End Sub
 
     Private Sub AddLanguageButton(ByVal frm As Form)
-        Dim btn As New ControlBoxButton
+        Dim btn As New GenericControlboxButtonLanguage()
 
         btn.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         btn.Location = New Point(frm.ClientRectangle.Width - 55, frm.ClientRectangle.Height - 55)
-        btn.Name = "GenericButton_Language"
-        btn.SetImage(4)
+        btn.Name = "GenericButtonLanguageSettings"
         btn.Size = New Size(50, 50)
-        btn.Tag = 14
 
         AddHandler btn.Click, AddressOf GenericButtonLanguage_Click
         AddHandler btn.MouseEnter, AddressOf FormDesignAndControl.ControlMouseEnter
@@ -79,14 +65,12 @@
     End Sub
 
     Private Sub AddRegisterButton(ByVal frm As Form)
-        Dim btn As New ControlBoxButton
+        Dim btn As New GenericControlboxButtonRegister()
 
         btn.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
         btn.Location = New Point(5, frm.ClientRectangle.Height - 55)
-        btn.Name = "GenericButton_Register"
-        btn.SetImage(5)
+        btn.Name = "GenericButtonRegisterForm"
         btn.Size = New Size(50, 50)
-        btn.Tag = 15
 
         AddHandler btn.Click, AddressOf GenericButtonRegister_Click
         AddHandler btn.MouseEnter, AddressOf FormDesignAndControl.ControlMouseEnter
@@ -108,7 +92,7 @@
     Private Sub GenericButtonRegister_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         DirectCast(sender, ControlBoxButton).FindForm.Hide()
 
-        RegisterForm.Init()
+        GenericRegisterForm.Show()
     End Sub
 
     Private Sub AddCopyRightLabel(ByVal frm As Form)

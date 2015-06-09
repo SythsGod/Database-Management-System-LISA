@@ -1,57 +1,26 @@
 ﻿Public Class GenericForm
     Inherits Form
 
-    Private mHasControlbox As Boolean
-
-    Private m_backcolor As Color
-    Private m_opacity As Double
-    Private m_transparent As Boolean
-    Private m_transparentColor As Color
-
-    Sub Init()
+    Sub New(ByVal name As String, ByVal needsControlbox As Boolean)
         Me.BackColor = Color.White
-        Me.Name = ""
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        Me.Name = name
         Me.Size = New Size(1280, 720)
         Me.StartPosition = FormStartPosition.CenterScreen
 
+        SetStyles()
+        AddCopyRightLabel(Me)
+
+        If needsControlbox Then ControlBoxButton.AddControlbox(Me)
+    End Sub
+
+    Private Sub SetStyles()
         SetStyle(ControlStyles.SupportsTransparentBackColor, True)
         SetStyle(ControlStyles.Opaque, False)
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         SetStyle(ControlStyles.UserPaint, True)
         UpdateStyles()
-
-        AddCopyRightLabel(Me)
-    End Sub
-    Sub New(ByVal name As String, ByVal needsControlbox As Boolean)
-        Init()
-        Me.Name = name
-
-        If needsControlbox Then
-            AddControlBox(Me)
-            Me.mHasControlbox = True
-        Else
-            Me.mHasControlbox = False
-        End If
-    End Sub
-
-    Public Shared Sub AddControlBox(ByVal frm As Form)
-        For i = 0 To 2
-            Dim btn As New ControlBoxButton
-
-            btn.Location = New Point(frm.ClientRectangle.Width - 30 * (i + 1) + 1, -1)
-            btn.Name = "GenericControlBoxButton" & i
-            btn.SetImage(i)
-            btn.Size = New Size(30, 30)
-            btn.Tag = "1" & i
-
-            AddHandler btn.Click, AddressOf FormDesignAndControl.ControlMouseClick
-            AddHandler btn.MouseEnter, AddressOf FormDesignAndControl.ControlMouseEnter
-            AddHandler btn.MouseLeave, AddressOf FormDesignAndControl.ControlMouseLeave
-
-            frm.Controls.Add(btn)
-        Next
     End Sub
 
     Private Sub AddCopyRightLabel(ByVal frm As Form)

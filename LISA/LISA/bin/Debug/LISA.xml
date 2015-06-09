@@ -15,35 +15,35 @@ LISA
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Close_2_0">
+</member><member name="P:LISA.My.Resources.Resources.ButtonClose">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Close_2_1">
+</member><member name="P:LISA.My.Resources.Resources.ButtonCloseHover">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_0_0">
+</member><member name="P:LISA.My.Resources.Resources.ButtonMaximize">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_0_1">
+</member><member name="P:LISA.My.Resources.Resources.ButtonMaximized">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_1_0">
+</member><member name="P:LISA.My.Resources.Resources.ButtonMaximizedHover">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Maximize_2_1_1">
+</member><member name="P:LISA.My.Resources.Resources.ButtonMaximizeHover">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Minimize_2_0">
+</member><member name="P:LISA.My.Resources.Resources.ButtonMinimize">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Button_Minimize_2_1">
+</member><member name="P:LISA.My.Resources.Resources.ButtonMinimizeHover">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
@@ -63,27 +63,31 @@ LISA
 	<summary>
   Looks up a localized string similar to gip6ib.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Language_Settings_Icon__Active_">
+</member><member name="P:LISA.My.Resources.Resources.LangSetting">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Language_Settings_Icon__Inactive_">
+</member><member name="P:LISA.My.Resources.Resources.LangSettingHover">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Lisa_Icon_Style_2_No_BG">
+</member><member name="P:LISA.My.Resources.Resources.LisaIcon3D">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Lisa_Temp_Icon">
+</member><member name="P:LISA.My.Resources.Resources.LisaIconFlat">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Register_Form_Icon__Active_">
+</member><member name="P:LISA.My.Resources.Resources.LisaIconFlatIco">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+</summary>
+</member><member name="P:LISA.My.Resources.Resources.RegisterForm">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:LISA.My.Resources.Resources.Register_Form_Icon__Inactive_">
+</member><member name="P:LISA.My.Resources.Resources.RegisterFormHover">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

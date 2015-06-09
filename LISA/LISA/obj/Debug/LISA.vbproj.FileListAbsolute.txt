@@ -154,8 +154,9 @@ D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.Resources.res
 D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.SplashLoading.resources
 D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.FirstStart.resources
 D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbproj.GenerateResource.Cache
-D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.vbprojResolveAssemblyReference.cache
 D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe
 D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.pdb
 D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.xml
 D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\MySql.Data.dll
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe.CodeAnalysisLog.xml
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe.lastcodeanalysissucceeded
