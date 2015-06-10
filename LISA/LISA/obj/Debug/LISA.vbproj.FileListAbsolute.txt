@@ -158,5 +158,8 @@ D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe
 D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.pdb
 D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.xml
 D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\MySql.Data.dll
-D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe.CodeAnalysisLog.xml
-D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe.lastcodeanalysissucceeded
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.exe.manifest
+D:\Github\Database-Management-System-LISA\LISA\LISA\bin\Debug\LISA.application
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.TrustInfo.xml
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.exe.manifest
+D:\Github\Database-Management-System-LISA\LISA\LISA\obj\Debug\LISA.application
